@@ -5,4 +5,7 @@ export const validationSchema = Joi.object({
 
   POSTGRES_HOST: Joi.string().default('http://localhost'),
   POSTGRES_PORT: Joi.number().default(5432),
+  POSTGRES_USERNAME: Joi.string(),
+  POSTGRES_PASSWORD: Joi.string(),
+  POSTGRES_DB_NAME: Joi.string(),
 });
