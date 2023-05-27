@@ -11,12 +11,15 @@ export type DbConfig = {
 };
 
 export type EnvConfig = {
+  nodeEnv: 'production' | 'development';
   nest: NestConfig;
   db: DbConfig;
 };
 
 export const configuration = (): EnvConfig => {
   return {
+    nodeEnv: process.env.NODE_ENV as 'production' | 'development', // validated in validationSchema so it's okay to cast
+
     nest: {
       port: parseInt(process.env.NEST_PORT),
     },
