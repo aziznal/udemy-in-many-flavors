@@ -1,3 +1,7 @@
+export type NestConfig = {
+  port: number;
+};
+
 export type DbConfig = {
   host: string;
   port: number;
@@ -7,11 +11,16 @@ export type DbConfig = {
 };
 
 export type EnvConfig = {
+  nest: NestConfig;
   db: DbConfig;
 };
 
 export const configuration = (): EnvConfig => {
   return {
+    nest: {
+      port: parseInt(process.env.NEST_PORT),
+    },
+
     db: {
       host: process.env.POSTGRES_HOST,
       port: parseInt(process.env.POSTGRES_PORT, 10),
