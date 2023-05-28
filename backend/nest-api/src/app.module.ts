@@ -7,6 +7,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DbConfig, EnvConfig, configuration } from '../config/configuration';
 import { validationSchema } from 'config/validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -26,11 +27,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
           password: configService.get<DbConfig>('db').password,
           database: configService.get<DbConfig>('db').database,
           autoLoadEntities: true,
+          synchronize: true,
         };
       },
 
       inject: [ConfigService],
     }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
