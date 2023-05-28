@@ -8,6 +8,7 @@ import { DbConfig, EnvConfig, configuration } from '../config/configuration';
 import { validationSchema } from 'config/validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './modules/user/user.module';
+import { CourseModule } from './modules/course/course.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { UserModule } from './modules/user/user.module';
       inject: [ConfigService],
     }),
     UserModule,
+    CourseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
