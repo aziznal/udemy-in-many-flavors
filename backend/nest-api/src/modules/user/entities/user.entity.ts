@@ -1,5 +1,6 @@
 import { BaseEntity } from 'src/modules/common/entities/base.entity';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Course } from 'src/modules/course/entities/course.entity';
+import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity({
   name: 'user',
@@ -7,13 +8,14 @@ import { Column, Entity, PrimaryColumn } from 'typeorm';
 export class User extends BaseEntity {
   @PrimaryColumn({
     type: 'text',
-    default: false,
   })
   username: string;
 
   @Column({
     type: 'text',
-    default: false,
   })
   password: string;
+
+  @OneToMany(() => User, (course: Course) => course.user)
+  courses: Course;
 }

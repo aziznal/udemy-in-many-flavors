@@ -9,6 +9,10 @@ import { validationSchema } from 'config/validation';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './modules/user/user.module';
 import { CourseModule } from './modules/course/course.module';
+import { CategoryModule } from './modules/category/category.module';
+import { SubcategoryModule } from './modules/subcategory/subcategory.module';
+import { SectionModule } from './modules/section/section.module';
+import { CurriculumItemModule } from './modules/curriculum-item/curriculum-item.module';
 
 @Module({
   imports: [
@@ -36,6 +40,10 @@ import { CourseModule } from './modules/course/course.module';
     }),
     UserModule,
     CourseModule,
+    CategoryModule,
+    SubcategoryModule,
+    SectionModule,
+    CurriculumItemModule,
   ],
   controllers: [AppController],
   providers: [AppService],

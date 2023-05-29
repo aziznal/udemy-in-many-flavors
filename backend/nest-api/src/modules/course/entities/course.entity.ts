@@ -1,16 +1,29 @@
+import { Category } from 'src/modules/category/entities/category.entity';
 import { BaseEntity } from 'src/modules/common/entities/base.entity';
-import { Column, Entity } from 'typeorm';
-
-// TODO: add rest of properties once I figure out how foreign keys work
+import { Section } from 'src/modules/section/entities/section.entity';
+import { User } from 'src/modules/user/entities/user.entity';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class Course extends BaseEntity {
-  @Column({ type: 'text', default: false })
+  @ManyToOne(() => Course, (user: User) => user.courses)
+  user: User;
+
+  @Column({ type: 'text' })
   title: string;
 
-  @Column({ type: 'text', default: false })
+  @Column({ type: 'text' })
   subtitle: string;
 
-  @Column({ type: 'text', default: false })
+  @Column({ type: 'text' })
   description: string;
+
+  @Column({ type: 'text' })
+  price: number;
+
+  @ManyToOne(() => Category, (category: Category) => category.courses)
+  category: Category;
+
+  @OneToMany(() => Section, (section: Section) => section.course)
+  sections: Course;
 }
