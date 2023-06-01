@@ -10,4 +10,6 @@ export const validationSchema = Joi.object({
   POSTGRES_USERNAME: Joi.string(),
   POSTGRES_PASSWORD: Joi.string(),
   POSTGRES_DB_NAME: Joi.string(),
+
+  JWT_SECRET: Joi.string(),
 });

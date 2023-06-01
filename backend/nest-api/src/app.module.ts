@@ -13,6 +13,8 @@ import { CategoryModule } from './modules/category/category.module';
 import { SubcategoryModule } from './modules/subcategory/subcategory.module';
 import { SectionModule } from './modules/section/section.module';
 import { CurriculumItemModule } from './modules/curriculum-item/curriculum-item.module';
+import { JwtModule, JwtService } from '@nestjs/jwt';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -38,6 +40,21 @@ import { CurriculumItemModule } from './modules/curriculum-item/curriculum-item.
 
       inject: [ConfigService],
     }),
+    JwtModule.registerAsync({
+      global: true,
+
+      useFactory: (configService: ConfigService<EnvConfig>) => {
+        return {
+          secret: configService.get('jwtSecret'),
+          signOptions: {
+            expiresIn: '3d',
+          },
+        };
+      },
+
+      inject: [ConfigService],
+    }),
+    AuthModule,
     UserModule,
     CourseModule,
     CategoryModule,

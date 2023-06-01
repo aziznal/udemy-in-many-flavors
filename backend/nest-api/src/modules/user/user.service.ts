@@ -15,6 +15,24 @@ export class UserService {
     return this.userRepository.find();
   }
 
+  async findOne({
+    username,
+    id,
+  }: {
+    username?: string;
+    id?: string;
+  }): Promise<User | null> {
+    if (username) {
+      return this.userRepository.findOne({ where: { username } });
+    }
+
+    if (id) {
+      return this.userRepository.findOne({ where: { id } });
+    }
+
+    return null;
+  }
+
   async createUser(user: CreateUserDto): Promise<User> {
     // cofirm user is unique
     const existingUser = await this.userRepository.findOne({
