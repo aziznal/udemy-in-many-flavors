@@ -1,7 +1,7 @@
 // This file includes definitions for all routes used in the app.
 
 class HomeRoutes {
-  get absoluteHomePath(): string {
+  static get absoluteHomePath(): string {
     return '/';
   }
 }
@@ -10,19 +10,19 @@ class HomeRoutes {
 class JoinRoutes {
   static root = 'join';
 
-  static loginDef: 'login';
-  static signupDef: 'signup';
+  static loginDef = 'login';
+  static registerDef = 'register';
 
   static absoluteLoginPath(): string {
     return `/${this.root}/${this.loginDef}`;
   }
 
-  static absoluteSignupPath(): string {
-    return `/${this.root}/${this.signupDef}`;
+  static absoluteRegisterPath(): string {
+    return `/${this.root}/${this.registerDef}`;
   }
 }
 
-export const routes = {
+export const AppRoutes = {
   home: HomeRoutes,
   join: JoinRoutes,
 }
