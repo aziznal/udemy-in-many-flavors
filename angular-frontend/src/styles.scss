@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+
+@use './styles/reset.scss';
+
+@use './styles/colors.scss';
+@use './styles/typography.scss';
+
+@use './styles/components/button.scss';
+
+* {
+  box-sizing: border-box;
+}
+

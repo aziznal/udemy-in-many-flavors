@@ -1,0 +1,60 @@
+
+button {
+  --button-size: 42px;
+
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+  font-weight: var(--fw-bold);
+
+  height: var(--button-size);
+
+  padding: .8rem;
+
+  border: none;
+
+  cursor: pointer;
+
+  transition: 150ms background-color ease-out;
+
+  &.icon-button {
+    width: var(--button-size);
+  }
+
+  &.primary {
+    background-color: var(--color-primary);
+    color: white;
+
+    &:hover {
+      background-color: var(--color-primary-dark)
+    }
+  }
+
+  &.black {
+    background-color: var(--color-black);
+    color: var(--color-white);
+
+    &:hover {
+      background-color: var(--color-black-light)
+    }
+  }
+
+  &.white {
+    background-color: var(--color-white-light);
+    color: var(--color-black);
+
+    &:hover {
+      background-color: var(--color-white-dark)
+    }
+
+    --border-width: 1px;
+    // using box-shadow to make the border on the inside of the button
+    -webkit-box-shadow:inset 0px 0px 0px var(--border-width) black;
+    -moz-box-shadow:inset 0px 0px 0px var(--border-width) black;
+    box-shadow:inset 0px 0px 0px var(--border-width) black;
+  }
+}
+
