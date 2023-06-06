@@ -1,0 +1,59 @@
+:host {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 25px;
+
+  height: 75px;
+
+  padding: 25px;
+
+  background-color: var(--color-white-light);
+
+  box-shadow: 1px 1px 5px 5px #00000011;
+}
+
+.logo {
+  font-size: 1.5rem;
+
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+
+    width: 12px;
+    height: 12px;
+
+    top: 0px;
+    left: 2px;
+
+    border-top: 3px solid var(--color-primary);
+    border-left: 3px solid var(--color-primary);
+
+    position: absolute;
+
+    rotate: 45deg;
+  }
+}
+
+.search-bar {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+
+  height: 50px;
+
+  color: gray;
+
+  padding-inline: 1rem;
+
+  border: 1px solid black;
+  border-radius: 500px;
+
+  background-color: var(--color-white);
+}

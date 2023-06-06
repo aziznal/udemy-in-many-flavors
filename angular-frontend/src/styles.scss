@@ -4,10 +4,5 @@
 
 @use './styles/colors.scss';
 @use './styles/typography.scss';
-
+@use './styles/material-icons.scss';
 @use './styles/components/button.scss';
-
-* {
-  box-sizing: border-box;
-}
-

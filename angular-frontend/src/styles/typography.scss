@@ -5,9 +5,10 @@
   --fw-regular: 400;
   --fw-light: 300;
 
-  --fs-body: 16px;
+  --fs-body: 13px;
 }
 
+:root,
 body {
   font-family: var(--font-family);
   font-weight: var(--fw-regular);

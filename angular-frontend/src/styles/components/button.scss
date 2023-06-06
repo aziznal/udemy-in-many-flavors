@@ -1,3 +1,10 @@
+.clickable {
+  cursor: pointer;
+
+  &:hover {
+    color: var(--color-primary);
+  }
+}
 
 button {
   --button-size: 42px;
@@ -9,19 +16,26 @@ button {
   justify-content: center;
 
   font-weight: var(--fw-bold);
+  font-size: 1rem;
 
   height: var(--button-size);
 
-  padding: .8rem;
+  padding-inline: 1.2rem;
 
   border: none;
 
   cursor: pointer;
 
-  transition: 150ms background-color ease-out;
+  background-color: transparent;
+
+  &:hover {
+    color: var(--color-primary);
+  }
 
   &.icon-button {
     width: var(--button-size);
+
+    // hovers are  handled in each color class
   }
 
   &.primary {
@@ -29,7 +43,7 @@ button {
     color: white;
 
     &:hover {
-      background-color: var(--color-primary-dark)
+      background-color: var(--color-primary-dark);
     }
   }
 
@@ -38,7 +52,7 @@ button {
     color: var(--color-white);
 
     &:hover {
-      background-color: var(--color-black-light)
+      background-color: var(--color-black-dark);
     }
   }
 
@@ -47,14 +61,13 @@ button {
     color: var(--color-black);
 
     &:hover {
-      background-color: var(--color-white-dark)
+      background-color: var(--color-white);
     }
 
     --border-width: 1px;
     // using box-shadow to make the border on the inside of the button
-    -webkit-box-shadow:inset 0px 0px 0px var(--border-width) black;
-    -moz-box-shadow:inset 0px 0px 0px var(--border-width) black;
-    box-shadow:inset 0px 0px 0px var(--border-width) black;
+    -webkit-box-shadow: inset 0px 0px 0px var(--border-width) black;
+    -moz-box-shadow: inset 0px 0px 0px var(--border-width) black;
+    box-shadow: inset 0px 0px 0px var(--border-width) black;
   }
 }
-
