@@ -6,3 +6,31 @@
 @use './styles/typography.scss';
 @use './styles/material-icons.scss';
 @use './styles/components/button.scss';
+
+:root {
+  --light-shadow: 1px 1px 5px 5px #00000011;
+}
+
+.logo {
+  font-size: 1.5rem;
+
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+
+    width: 12px;
+    height: 12px;
+
+    top: 0px;
+    left: 0px;
+
+    border-top: 3px solid var(--color-primary);
+    border-left: 3px solid var(--color-primary);
+
+    position: absolute;
+
+    rotate: 45deg;
+  }
+}

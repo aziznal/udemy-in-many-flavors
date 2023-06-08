@@ -1,0 +1,101 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2rem;
+
+  color: white;
+
+  background-color: var(--color-black);
+
+  padding-inline: 3rem;
+}
+
+hr {
+  width: 100%;
+
+  border: none;
+  border-top: 1px solid #404040;
+}
+
+.heading {
+  display: flex;
+  width: 100%;
+
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 2rem;
+}
+
+.company-list {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+
+  gap: 1.8rem;
+}
+
+.body {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+
+  gap: 8rem;
+
+  color: lightgray;
+
+  ul {
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+
+}
+
+.language {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+
+  gap: 0.4rem;
+
+  border: 1px solid white;
+
+  height: fit-content;
+
+  padding-block: 0.5rem;
+  padding-inline: 1rem 1.9rem;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: #404040;
+  }
+}
+
+.footing {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: space-between;
+
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
