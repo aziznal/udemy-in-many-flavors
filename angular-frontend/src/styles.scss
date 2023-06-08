@@ -5,7 +5,9 @@
 @use './styles/colors.scss';
 @use './styles/typography.scss';
 @use './styles/material-icons.scss';
+
 @use './styles/components/button.scss';
+@use './styles/components/input.scss';
 
 :root {
   --light-shadow: 1px 1px 5px 5px #00000011;
@@ -33,4 +35,13 @@
 
     rotate: 45deg;
   }
+}
+
+.link {
+  color: var(--color-primary);
+
+  text-decoration: underline;
+  font-weight: var(--fw-bold);
+
+  cursor: pointer;
 }
