@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { AuthApi, LoginRequest } from '../api/auth-api';
+import { AuthApi, LoginRequest, RegisterRequest } from '../api/auth-api';
 import { TokenService } from './token.service';
 import { tap } from 'rxjs';
 import { UseQuery } from '@ngneat/query';
@@ -18,11 +18,11 @@ export class AuthService {
   tokenService = inject(TokenService);
   useQuery = inject(UseQuery);
 
-  login(data: LoginRequest) {
+  login(loginCredentials: LoginRequest) {
     return this.useQuery(
-      ['login', data],
+      ['login', loginCredentials],
       () => {
-        return this.authApi.login(data).pipe(
+        return this.authApi.login(loginCredentials).pipe(
           tap((response) => {
             this.tokenService.encodedToken = response.accessToken;
           })
@@ -33,5 +33,15 @@ export class AuthService {
         refetchOnWindowFocus: false,
       }
     );
+  }
+
+  register(registerCredentials: RegisterRequest) {
+    return this.useQuery(['register', registerCredentials], () => {
+      return this.authApi.register(registerCredentials).pipe(
+        tap((response) => {
+          this.tokenService.encodedToken = response.accessToken;
+        })
+      );
+    });
   }
 }
