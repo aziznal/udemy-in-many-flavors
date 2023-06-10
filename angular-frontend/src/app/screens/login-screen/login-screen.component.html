@@ -14,7 +14,7 @@
       <img
         src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Facebook_Home_logo_old.svg"
       />
-
+      button
       <span> Continue with Facebook </span>
     </div>
 
@@ -62,7 +62,14 @@
 
       <hr />
 
-      <div>Don't have an account? <span class="link">Sign up</span></div>
+      <div>
+        Don't have an account?
+        <a
+          [routerLink]="AppRoutes.join.absoluteRegisterPath()"
+          class="link"
+          >Sign up</a
+        >
+      </div>
 
       <div class="link">Log in with your organization</div>
     </div>
