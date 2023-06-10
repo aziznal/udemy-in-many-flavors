@@ -5,18 +5,33 @@ import { RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginRequest } from 'src/app/api/auth-api';
 import { AlertComponent } from 'src/app/components/alert/alert.component';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, AlertComponent],
+  imports: [CommonModule, RouterModule, AlertComponent, ReactiveFormsModule],
   templateUrl: './login-screen.component.html',
   styleUrls: ['./login-screen.component.scss'],
 })
 export class LoginScreenComponent {
   authService = inject(AuthService);
+  formBuilder = inject(FormBuilder);
 
   isLoading = signal(false);
   isError = signal(false);
+
+  form = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: [
+      '',
+      [
+        Validators.required,
+
+        // 8+ of any characters
+        Validators.pattern(/.{8,}/),
+      ],
+    ],
+  });
 
   get AppRoutes() {
     return AppRoutes;
@@ -25,26 +40,27 @@ export class LoginScreenComponent {
   login(event: Event) {
     event.preventDefault();
 
-    const loginData = this.#extractFormData();
+    if (this.form.invalid) {
+      return;
+    }
 
-    this.authService.login(loginData).result$.subscribe((state) => {
-      this.isLoading.set(state.isLoading);
+    this.isLoading.set(false);
+    this.isError.set(false);
 
-      if (state.isError) {
-        this.isError.set(state.isError);
-      }
+    this.authService
+      // okay to cast since validity is checked
+      .login(this.form.value as LoginRequest)
+      .result$.subscribe((state) => {
+        this.isLoading.set(state.isLoading);
 
-      if (state.isSuccess) {
-        return this.#routeToMainScreen();
-      }
-    });
-  }
+        if (state.isError) {
+          return this.isError.set(state.isError);
+        }
 
-  #extractFormData(): LoginRequest {
-    return {
-      email: 'foo',
-      password: 'bar',
-    };
+        if (state.isSuccess) {
+          return this.#routeToMainScreen();
+        }
+      });
   }
 
   #routeToMainScreen(): void {
