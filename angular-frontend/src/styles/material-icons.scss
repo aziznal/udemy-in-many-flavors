@@ -11,6 +11,8 @@
   white-space: nowrap;
   direction: ltr;
 
+  user-select: none;
+
   /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
   /* Support for Safari and Chrome. */
@@ -35,6 +37,8 @@
   word-wrap: normal;
   white-space: nowrap;
   direction: ltr;
+
+  user-select: none;
 
   /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
