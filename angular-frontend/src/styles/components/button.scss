@@ -25,15 +25,9 @@ a.btn {
 
   border: none;
 
-  cursor: pointer;
-
   background-color: transparent;
 
   text-decoration: none;
-
-  &:hover {
-    color: var(--color-primary);
-  }
 
   &.icon-button {
     width: var(--button-size);
@@ -41,36 +35,49 @@ a.btn {
     // hovers are  handled in each color class
   }
 
-  &.primary {
-    background-color: var(--color-primary);
-    color: white;
+  &:not(.disabled) {
+    cursor: pointer;
 
     &:hover {
-      background-color: var(--color-primary-dark);
+      color: var(--color-primary);
+    }
+
+    &.primary {
+      background-color: var(--color-primary);
+      color: white;
+
+      &:hover {
+        background-color: var(--color-primary-dark);
+      }
+    }
+
+    &.black {
+      background-color: var(--color-black);
+      color: var(--color-white);
+
+      &:hover {
+        background-color: var(--color-black-dark);
+      }
+    }
+
+    &.white {
+      background-color: var(--color-white-light);
+      color: var(--color-black);
+
+      &:hover {
+        background-color: var(--color-white);
+      }
+
+      --border-width: 1px;
+      // using box-shadow to make the border on the inside of the button
+      -webkit-box-shadow: inset 0px 0px 0px var(--border-width) black;
+      -moz-box-shadow: inset 0px 0px 0px var(--border-width) black;
+      box-shadow: inset 0px 0px 0px var(--border-width) black;
     }
   }
 
-  &.black {
-    background-color: var(--color-black);
-    color: var(--color-white);
-
-    &:hover {
-      background-color: var(--color-black-dark);
-    }
-  }
-
-  &.white {
-    background-color: var(--color-white-light);
-    color: var(--color-black);
-
-    &:hover {
-      background-color: var(--color-white);
-    }
-
-    --border-width: 1px;
-    // using box-shadow to make the border on the inside of the button
-    -webkit-box-shadow: inset 0px 0px 0px var(--border-width) black;
-    -moz-box-shadow: inset 0px 0px 0px var(--border-width) black;
-    box-shadow: inset 0px 0px 0px var(--border-width) black;
+  &.disabled {
+    background-color: gray;
+    cursor: default;
   }
 }
