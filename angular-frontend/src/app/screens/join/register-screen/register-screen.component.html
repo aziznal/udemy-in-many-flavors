@@ -23,9 +23,9 @@
 
     <label>
       <input
-        type="password"
         placeholder="Password"
         formControlName="password"
+        [type]="isPasswordHidden() ? 'password' : 'text'"
       />
 
       <button
@@ -39,7 +39,7 @@
 
     <!-- Password Strength Meter -->
     <app-password-strength-meter
-      [password]=""
+      [password]="this.form.value['password']!"
       style="height: 20px"
     ></app-password-strength-meter>
 
