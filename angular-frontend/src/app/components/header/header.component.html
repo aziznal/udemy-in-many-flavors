@@ -17,9 +17,19 @@
     <span class="material-icons-outlined"> shopping_cart </span>
   </button>
 
-  <button class="white">Log in</button>
+  <a
+    class="btn white"
+    [routerLink]="AppRoutes.join.absoluteLoginPath()"
+  >
+    Log in
+  </a>
 
-  <button class="black">Sign Up</button>
+  <a
+    class="btn black"
+    [routerLink]="AppRoutes.join.absoluteRegisterPath()"
+  >
+    Sign Up
+  </a>
 
   <button class="white icon-button">
     <span class="material-icons-outlined"> language </span>
