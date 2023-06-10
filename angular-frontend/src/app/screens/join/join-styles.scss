@@ -1,0 +1,51 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+
+  padding-block: 3rem;
+
+  align-items: center;
+
+  width: 400px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+
+  width: 400px;
+
+  gap: 6px;
+}
+
+.login-type {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+
+  width: 100%;
+
+  padding: 12px;
+
+  height: 48px;
+
+  font-weight: var(--fw-bold);
+  font-size: 1.1rem;
+
+  border: 1px solid black;
+
+  cursor: pointer;
+
+  img {
+    width: 24px;
+
+    margin-inline-end: 12px;
+  }
+
+  &:hover {
+    background-color: var(--color-white-dark);
+  }
+}
