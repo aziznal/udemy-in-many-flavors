@@ -5,6 +5,8 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { TokenService } from './services/token.service';
+import { delay, of, switchMap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -14,13 +16,25 @@ export class AuthInterceptor implements HttpInterceptor {
     const authToken = this.tokenService.encodedToken;
 
     if (!authToken) {
-      return next.handle(req);
+      return of('').pipe(
+        delay(environment.mockRequestDelay),
+
+        switchMap(() => {
+          return next.handle(req).pipe();
+        })
+      );
     }
 
     const authReq = req.clone({
       headers: req.headers.set('Authorization', 'Bearer ' + authToken),
     });
 
-    return next.handle(authReq);
+    return of('').pipe(
+      delay(environment.mockRequestDelay),
+
+      switchMap(() => {
+        return next.handle(authReq).pipe();
+      })
+    );
   }
 }
