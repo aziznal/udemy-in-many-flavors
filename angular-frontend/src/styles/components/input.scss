@@ -1,8 +1,25 @@
 label {
   font-weight: var(--fw-bold);
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  // assuming this is also inside the label
+  .suffix {
+    position: absolute;
+
+    right: 12px;
+    top: auto;
+
+    // adjusts icon size since most likey it's a material icon here
+    font-size: 1.6rem;
+  }
 }
 
 // apply to all inputs, except checkbox
+// this assumes that the input is inside the label
 input:not([type='checkbox']) {
   height: 56px;
 

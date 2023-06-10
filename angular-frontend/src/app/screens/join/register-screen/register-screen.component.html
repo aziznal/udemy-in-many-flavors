@@ -1,5 +1,5 @@
 <h3 style="display: flex; text-align: start; width: 100%">
-  Sign up and start learning
+  top: auto; bottom: auto; Sign up and start learning
 </h3>
 
 <div class="login-form">
@@ -24,6 +24,14 @@
         placeholder="Password"
         #passwordInput
       />
+
+      <button
+        type="button"
+        class="material-icons suffix"
+        (click)="togglePasswordVisibility()"
+      >
+        {{ isPasswordHidden() ? 'visibility' : 'visibility_off' }}
+      </button>
     </label>
 
     <!-- Password Strength Meter -->
@@ -44,7 +52,7 @@
     </div>
 
     <button
-      class="primary"
+      class="btn primary"
       type="submit"
     >
       Sign up

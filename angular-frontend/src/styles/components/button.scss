@@ -6,8 +6,18 @@
   }
 }
 
-button,
-a.btn {
+// resetting default button styles
+button {
+  border: none;
+  background: none;
+
+  cursor: pointer;
+
+  margin: 0;
+  padding: 0;
+}
+
+.btn {
   --button-size: 42px;
 
   display: flex;
@@ -22,10 +32,6 @@ a.btn {
   height: var(--button-size);
 
   padding-inline: 1.2rem;
-
-  border: none;
-
-  background-color: transparent;
 
   text-decoration: none;
 

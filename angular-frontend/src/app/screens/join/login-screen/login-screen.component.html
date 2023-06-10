@@ -45,14 +45,22 @@
 
     <label>
       <input
-        type="password"
         placeholder="Password"
         formControlName="password"
+        [type]="isPasswordHidden() ? 'password' : 'text'"
       />
+
+      <button
+        type="button"
+        class="material-icons suffix"
+        (click)="togglePasswordVisibility()"
+      >
+        {{ isPasswordHidden() ? 'visibility' : 'visibility_off' }}
+      </button>
     </label>
 
     <button
-      class="primary"
+      class="btn primary"
       [class.disabled]="isLoading()"
       type="submit"
       (click)="login($event)"

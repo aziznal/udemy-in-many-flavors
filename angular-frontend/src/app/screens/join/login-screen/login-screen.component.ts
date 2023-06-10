@@ -1,4 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppRoutes } from 'src/routes';
 import { RouterModule } from '@angular/router';
@@ -12,6 +17,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   imports: [CommonModule, RouterModule, AlertComponent, ReactiveFormsModule],
   templateUrl: './login-screen.component.html',
   styleUrls: ['./login-screen.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginScreenComponent {
   authService = inject(AuthService);
@@ -19,6 +25,8 @@ export class LoginScreenComponent {
 
   isLoading = signal(false);
   isError = signal(false);
+
+  isPasswordHidden = signal(true);
 
   form = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -61,6 +69,10 @@ export class LoginScreenComponent {
           return this.#routeToMainScreen();
         }
       });
+  }
+
+  togglePasswordVisibility() {
+    this.isPasswordHidden.update((val) => !val);
   }
 
   #routeToMainScreen(): void {
