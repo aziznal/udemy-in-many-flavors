@@ -1,1 +1,83 @@
-<p>register-screen works!</p>
+<h3 style="display: flex; text-align: start; width: 100%">
+  Sign up and start learning
+</h3>
+
+<div class="login-form">
+  <form style="display: flex; flex-direction: column; gap: 8px">
+    <label>
+      <input
+        type="text"
+        placeholder="Full name"
+      />
+    </label>
+
+    <label>
+      <input
+        type="email"
+        placeholder="Email"
+      />
+    </label>
+
+    <label>
+      <input
+        type="password"
+        placeholder="Password"
+        #passwordInput
+      />
+    </label>
+
+    <!-- Password Strength Meter -->
+    <app-password-strength-meter
+      [password]=""
+      style="height: 20px"
+    ></app-password-strength-meter>
+
+    <div class="checkbox-input">
+      <input
+        id="tips"
+        type="checkbox"
+      />
+
+      <label for="tips">
+        Send me special offers, personalized recommendations, and learning tips.
+      </label>
+    </div>
+
+    <button
+      class="primary"
+      type="submit"
+    >
+      Sign up
+    </button>
+  </form>
+
+  <div
+    style="
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    "
+  >
+    <div class="you-agree-text">
+      By signing up, you agree to sell us
+      <span class="text-underlined">your soul </span>
+      and
+      <span class="text-underlined">kidneys</span>
+      (in that order)
+    </div>
+
+    <hr />
+
+    <div>
+      Already have an account?
+
+      <a
+        [routerLink]="AppRoutes.join.absoluteLoginPath()"
+        class="link"
+        >Log in</a
+      >
+    </div>
+  </div>
+</div>

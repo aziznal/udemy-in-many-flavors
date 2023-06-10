@@ -11,6 +11,15 @@
   width: 400px;
 }
 
+.form {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  gap: 6px;
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
