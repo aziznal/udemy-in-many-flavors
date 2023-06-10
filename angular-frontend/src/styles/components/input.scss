@@ -1,17 +1,9 @@
-.form {
-  display: flex;
-  flex-direction: column;
-
-  width: 100%;
-
-  gap: 6px;
-}
-
 label {
   font-weight: var(--fw-bold);
 }
 
-input {
+// apply to all inputs, except checkbox
+input:not([type='checkbox']) {
   height: 56px;
 
   width: 100%;
@@ -24,5 +16,23 @@ input {
 
   &::placeholder {
     color: var(--color-black);
+  }
+}
+
+.checkbox-input {
+  display: flex;
+
+  gap: 6px;
+
+  label {
+    font-weight: var(--fw-regular);
+  }
+
+  input {
+    width: 20px;
+    height: 20px;
+
+    margin-top: 2px;
+    cursor: pointer;
   }
 }
