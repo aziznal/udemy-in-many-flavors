@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppRoutes } from 'src/routes';
 import { HomeLayoutComponent } from './layouts/home-layout/home-layout.component';
-import { LoginScreenComponent } from './screens/login-screen/login-screen.component';
-import { RegisterScreenComponent } from './screens/register-screen/register-screen.component';
+import { LoginScreenComponent } from './screens/join/login-screen/login-screen.component';
+import { RegisterScreenComponent } from './screens/join/register-screen/register-screen.component';
 
 const routes: Routes = [
   {
@@ -21,14 +21,14 @@ const routes: Routes = [
             path: AppRoutes.join.registerDef,
             component: RegisterScreenComponent,
           },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
