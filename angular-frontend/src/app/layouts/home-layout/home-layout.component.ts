@@ -9,8 +9,6 @@ import { FooterComponent } from 'src/app/components/footer/footer.component';
   imports: [CommonModule, RouterModule, HeaderComponent, FooterComponent],
   templateUrl: './home-layout.component.html',
   styleUrls: ['./home-layout.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeLayoutComponent {
-
-}
+export class HomeLayoutComponent {}

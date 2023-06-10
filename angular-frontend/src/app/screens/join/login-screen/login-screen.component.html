@@ -1,76 +1,76 @@
-<div class="page-container">
-  <h3>Log in to your account</h3>
+<h3 style="display: flex; text-align: start; width: 100%">
+  Log in to your account
+</h3>
 
-  <div class="login-form">
-    <div class="login-type">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png"
+<div class="login-form">
+  <div class="login-type">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png"
+    />
+
+    <span> Continue with Google </span>
+  </div>
+
+  <div class="login-type">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Facebook_Home_logo_old.svg"
+    />
+    <span> Continue with Facebook </span>
+  </div>
+
+  <div class="login-type">
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+    />
+
+    <span> Continue with Apple </span>
+  </div>
+
+  <form style="display: flex; flex-direction: column; gap: 8px">
+    <label>
+      <input
+        type="text"
+        placeholder="Email"
       />
+    </label>
 
-      <span> Continue with Google </span>
-    </div>
-
-    <div class="login-type">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Facebook_Home_logo_old.svg"
+    <label>
+      <input
+        type="password"
+        placeholder="Password"
       />
-      <span> Continue with Facebook </span>
-    </div>
+    </label>
 
-    <div class="login-type">
-      <img
-        src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
-      />
-
-      <span> Continue with Apple </span>
-    </div>
-
-    <form style="display: flex; flex-direction: column; gap: 8px">
-      <label>
-        <input
-          type="text"
-          placeholder="Email"
-        />
-      </label>
-
-      <label>
-        <input
-          type="password"
-          placeholder="Password"
-        />
-      </label>
-
-      <button
-        class="primary"
-        type="submit"
-      >
-        Log in
-      </button>
-    </form>
-
-    <div
-      style="
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin-top: 4px;
-      "
+    <button
+      class="primary"
+      type="submit"
     >
-      <div>or <span class="link">Forgot Password</span></div>
+      Log in
+    </button>
+  </form>
 
-      <hr />
+  <div
+    style="
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    "
+  >
+    <div>or <span class="link">Forgot Password</span></div>
 
-      <div>
-        Don't have an account?
-        <a
-          [routerLink]="AppRoutes.join.absoluteRegisterPath()"
-          class="link"
-          >Sign up</a
-        >
-      </div>
+    <hr />
 
-      <div class="link">Log in with your organization</div>
+    <div>
+      Don't have an account?
+      <a
+        [routerLink]="AppRoutes.join.absoluteRegisterPath()"
+        class="link"
+        >Sign up</a
+      >
     </div>
+
+    <div class="link">Log in with your organization</div>
   </div>
 </div>
