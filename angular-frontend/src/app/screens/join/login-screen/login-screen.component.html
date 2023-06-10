@@ -26,7 +26,14 @@
     <span> Continue with Apple </span>
   </div>
 
-  <form style="display: flex; flex-direction: column; gap: 8px">
+  <app-alert *ngIf="isError()">
+    There was a problem logging in. Check your email and password or create an
+    account.
+  </app-alert>
+
+  <form
+    style="display: flex; flex-direction: column; gap: 8px; margin-top: 12px"
+  >
     <label>
       <input
         type="email"
@@ -43,7 +50,10 @@
 
     <button
       class="primary"
+      [class.disabled]="isLoading()"
       type="submit"
+      (click)="login($event)"
+      (submit)="login($event)"
     >
       Log in
     </button>
