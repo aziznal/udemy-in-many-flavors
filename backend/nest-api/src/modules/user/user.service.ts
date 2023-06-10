@@ -16,14 +16,14 @@ export class UserService {
   }
 
   async findOne({
-    username,
+    email,
     id,
   }: {
-    username?: string;
+    email?: string;
     id?: string;
   }): Promise<User | null> {
-    if (username) {
-      return this.userRepository.findOne({ where: { username } });
+    if (email) {
+      return this.userRepository.findOne({ where: { email } });
     }
 
     if (id) {
@@ -37,7 +37,7 @@ export class UserService {
     // cofirm user is unique
     const existingUser = await this.userRepository.findOne({
       where: {
-        username: user.username,
+        email: user.email,
       },
     });
 

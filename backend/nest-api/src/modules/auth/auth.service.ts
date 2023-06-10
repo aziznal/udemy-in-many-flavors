@@ -15,9 +15,9 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login({ username: loginUsername, password: loginPassword }: LoginDto) {
+  async login({ email: loginEmail, password: loginPassword }: LoginDto) {
     const matchedUser = await this.usersService.findOne({
-      username: loginUsername,
+      email: loginEmail,
     });
 
     if (!matchedUser)
@@ -46,11 +46,11 @@ export class AuthService {
    * Checks if given token is valid and belongs to an existing user
    */
   async verifyToken(token: string): Promise<boolean> {
-    const { username } = await this.jwtService.verifyAsync(token).catch(() => {
+    const { email } = await this.jwtService.verifyAsync(token).catch(() => {
       throw new UnauthorizedException('Invalid token');
     });
 
-    const user = await this.usersService.findOne({ username });
+    const user = await this.usersService.findOne({ email });
 
     if (!user) throw new NotFoundException('No user found');
 
@@ -74,6 +74,6 @@ export class AuthService {
   }
 
   async #createToken(user: User): Promise<string> {
-    return this.jwtService.signAsync({ username: user.username });
+    return this.jwtService.signAsync({ email: user.email });
   }
 }

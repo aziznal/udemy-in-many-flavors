@@ -9,12 +9,17 @@ export class User extends BaseEntity {
   @PrimaryColumn({
     type: 'text',
   })
-  username: string;
+  email: string;
 
   @Column({
     type: 'text',
   })
   password: string;
+
+  @Column({
+    type: 'text',
+  })
+  fullname: string;
 
   @OneToMany(() => User, (course: Course) => course.user)
   courses: Course;
