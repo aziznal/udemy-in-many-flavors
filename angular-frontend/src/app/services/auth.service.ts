@@ -1,13 +1,13 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { AuthApi, LoginRequest, RegisterRequest } from '../api/auth-api';
 import { TokenService } from './token.service';
 import { tap } from 'rxjs';
 import { UseQuery } from '@ngneat/query';
 
-export type LoginState = {
-  isLoading: boolean;
-  isSuccess: boolean;
-  isError: boolean;
+export type UserSession = {
+  email: string;
+  iat: number;
+  exp: number;
 };
 
 @Injectable({
@@ -18,30 +18,35 @@ export class AuthService {
   tokenService = inject(TokenService);
   useQuery = inject(UseQuery);
 
+  session = computed<UserSession | null>(() => {
+    return this.tokenService.decodedToken();
+  });
+
+  isloggedin = computed<boolean>(() => {
+    return this.tokenService.isTokenValid();
+  });
+
   login(loginCredentials: LoginRequest) {
-    return this.useQuery(
-      ['login', loginCredentials],
-      () => {
-        return this.authApi.login(loginCredentials).pipe(
-          tap((response) => {
-            this.tokenService.encodedToken = response.accessToken;
-          })
-        );
-      },
-      {
-        retry: false,
-        refetchOnWindowFocus: false,
-      }
-    );
+    return this.useQuery(['login', loginCredentials], () => {
+      return this.authApi.login(loginCredentials).pipe(
+        tap((response) => {
+          this.tokenService.encodedToken.set(response.accessToken);
+        })
+      );
+    });
   }
 
   register(registerCredentials: RegisterRequest) {
     return this.useQuery(['register', registerCredentials], () => {
       return this.authApi.register(registerCredentials).pipe(
         tap((response) => {
-          this.tokenService.encodedToken = response.accessToken;
+          this.tokenService.encodedToken.set(response.accessToken);
         })
       );
     });
+  }
+
+  logout() {
+    this.tokenService.encodedToken.set(null);
   }
 }

@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
+import { HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { TokenService } from './services/token.service';
 import { delay, of, switchMap } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -13,7 +9,7 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private tokenService: TokenService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const authToken = this.tokenService.encodedToken;
+    const authToken = this.tokenService.encodedToken();
 
     if (!authToken) {
       return of('').pipe(
