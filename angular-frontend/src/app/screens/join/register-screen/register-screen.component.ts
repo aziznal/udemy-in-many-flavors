@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AppRoutes } from 'src/routes';
 import { PasswordStrengthMeterComponent } from 'src/app/components/password-strength-meter/password-strength-meter.component';
 import { AuthService } from 'src/app/services/auth.service';
@@ -17,6 +17,7 @@ import { RegisterRequest } from 'src/app/api/auth-api';
 export class RegisterScreenComponent {
   authService = inject(AuthService);
   formBuilder = inject(FormBuilder);
+  router = inject(Router);
 
   isLoading = signal(false);
   isError = signal(false);
@@ -68,6 +69,6 @@ export class RegisterScreenComponent {
   }
 
   #routeToMainScreen(): void {
-    console.log('routing to main screen...');
+    this.router.navigateByUrl('/');
   }
 }

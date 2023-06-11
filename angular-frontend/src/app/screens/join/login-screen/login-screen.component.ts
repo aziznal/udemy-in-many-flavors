@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppRoutes } from 'src/routes';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginRequest } from 'src/app/api/auth-api';
 import { AlertComponent } from 'src/app/components/alert/alert.component';
@@ -17,6 +17,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 export class LoginScreenComponent {
   authService = inject(AuthService);
   formBuilder = inject(FormBuilder);
+  router = inject(Router);
 
   isLoading = signal(false);
   isError = signal(false);
@@ -71,6 +72,6 @@ export class LoginScreenComponent {
   }
 
   #routeToMainScreen(): void {
-    console.log('routing to main screen...');
+    this.router.navigateByUrl('/');
   }
 }
