@@ -1,4 +1,4 @@
-import { Injectable, computed, effect, inject, signal } from '@angular/core';
+import { Injectable, computed, inject } from '@angular/core';
 import { AuthApi, LoginRequest, RegisterRequest } from '../api/auth-api';
 import { TokenService } from './token.service';
 import { tap } from 'rxjs';

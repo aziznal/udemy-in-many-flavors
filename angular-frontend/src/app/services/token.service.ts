@@ -41,7 +41,7 @@ export class TokenService implements OnDestroy {
   #updateStoredToken = effect(() => {
     const newToken = this.encodedToken();
 
-    if (newToken === null) {
+    if (newToken === null || newToken === undefined) {
       localStorage.removeItem('token');
       return;
     }
