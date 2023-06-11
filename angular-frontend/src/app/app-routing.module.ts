@@ -5,6 +5,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { LoginScreenComponent } from './screens/join/login-screen/login-screen.component';
 import { RegisterScreenComponent } from './screens/join/register-screen/register-screen.component';
 import { HomeComponent } from './screens/home/home.component';
+import { joinGuard } from './guards/join.guard';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       },
       {
         path: AppRoutes.join.root,
+        canActivateChild: [joinGuard],
         children: [
           {
             path: AppRoutes.join.loginDef,
