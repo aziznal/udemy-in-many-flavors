@@ -1,6 +1,8 @@
 <h3 style="display: flex; text-align: start; width: 100%">Sign up and start learning</h3>
 
 <div class="login-form">
+  <app-alert *ngIf="isError()"> There was a problem signing up. Make sure to use a unique email or log in. </app-alert>
+
   <form
     [formGroup]="form"
     style="display: flex; flex-direction: column; gap: 8px"

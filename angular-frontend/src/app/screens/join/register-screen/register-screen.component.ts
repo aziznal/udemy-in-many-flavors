@@ -6,10 +6,11 @@ import { PasswordStrengthMeterComponent } from 'src/app/components/password-stre
 import { AuthService } from 'src/app/services/auth.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterRequest } from 'src/app/api/auth-api';
+import { AlertComponent } from 'src/app/components/alert/alert.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, PasswordStrengthMeterComponent, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, PasswordStrengthMeterComponent, ReactiveFormsModule, AlertComponent],
   templateUrl: './register-screen.component.html',
   styleUrls: ['./register-screen.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
