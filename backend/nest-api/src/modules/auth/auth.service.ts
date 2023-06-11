@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/login.dto';
@@ -10,30 +6,21 @@ import { User } from '../user/entities/user.entity';
 
 @Injectable()
 export class AuthService {
-  constructor(
-    private usersService: UserService,
-    private jwtService: JwtService,
-  ) {}
+  constructor(private usersService: UserService, private jwtService: JwtService) {}
 
   async login({ email: loginEmail, password: loginPassword }: LoginDto) {
     const matchedUser = await this.usersService.findOne({
       email: loginEmail,
     });
 
-    if (!matchedUser)
-      throw new NotFoundException(
-        'No user exists with the given username and password',
-      );
+    if (!matchedUser) throw new NotFoundException('No user exists with the given username and password');
 
     const isPasswordMatching = await this.#checkPasswordsMatch({
       password: loginPassword,
       storedPassword: matchedUser.password,
     });
 
-    if (!isPasswordMatching)
-      throw new NotFoundException(
-        'No user exists with the given username and password',
-      );
+    if (!isPasswordMatching) throw new NotFoundException('No user exists with the given username and password');
 
     const token = await this.#createToken(matchedUser);
 
