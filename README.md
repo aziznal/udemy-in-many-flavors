@@ -32,7 +32,7 @@ I plan on making frontends in the following frameworks:
 
 - **Angular** (my highest experience)
 - **NextJS (React)** (moderate experience)
-- **Vue** (no experience)
+- **Nuxt(Vue)** (no experience)
 - **SvelteKit** (barely tried it)
 - **Qwik** (no exp)
 - **SolidJS** (no exp)
