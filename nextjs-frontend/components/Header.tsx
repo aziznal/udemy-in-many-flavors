@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "./ui/button";
 import Logo from "./ui/logo";
 
@@ -28,9 +29,13 @@ export default function Header() {
       </Button>
 
       <div className="flex flex-row items-center gap-2">
-        <Button variant={"outline"}>Log in</Button>
+        <Button variant={"outline"} asChild>
+          <Link href="/join/login">Log in</Link>
+        </Button>
 
-        <Button>Sign Up</Button>
+        <Button>
+          <Link href="/join/register">Sign Up</Link>
+        </Button>
 
         <Button className="material-icons-outlined" variant={"outlineIcon"}>
           language
