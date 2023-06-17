@@ -28,7 +28,7 @@ export default function Footer() {
         <div className="flex flex-col justify-between">
           <Button
             variant="outline"
-            className="gap-1 border-white text-xs hover:bg-zinc-700"
+            className="gap-1 border-white text-xs justify-start hover:bg-zinc-700 w-[140px]"
           >
             <span className="material-icons-outlined">language</span>
             <span>English</span>
