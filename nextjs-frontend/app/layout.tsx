@@ -1,4 +1,3 @@
-import Head from "next/head";
 import "./globals.css";
 import { Inter } from "next/font/google";
 
@@ -14,17 +13,20 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en" className="h-100">
       <head>
         <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
+          as="style"
         />
 
         <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
           rel="stylesheet"
+          as="style"
         />
       </head>
 

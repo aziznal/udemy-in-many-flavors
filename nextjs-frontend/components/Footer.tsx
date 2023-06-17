@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+
 import Logo from "./ui/logo";
 import { Button } from "./ui/button";
 
@@ -19,7 +20,7 @@ export default function Footer() {
       <hr className="my-6 border-zinc-700" />
 
       <div className="flex flex-row justify-between">
-        <div className="flex flex-col gap-20 justify-between">
+        <div className="flex flex-col justify-between gap-20">
           <SiteLinks />
 
           <Logo />
@@ -28,7 +29,7 @@ export default function Footer() {
         <div className="flex flex-col justify-between">
           <Button
             variant="outline"
-            className="gap-1 border-white text-xs justify-start hover:bg-zinc-700 w-[140px]"
+            className="w-[140px] justify-start gap-1 border-white text-xs hover:bg-zinc-700"
           >
             <span className="material-icons-outlined">language</span>
             <span>English</span>
@@ -45,32 +46,32 @@ function CompanyLogoList() {
   return (
     <div className="flex flex-wrap gap-4">
       <Image
-        width="100"
-        height="100"
+        width={100}
+        height={100}
         src="https://s.udemycdn.com/partner-logos/v4/nasdaq-light.svg"
         alt="Nasdaq"
       />
       <Image
-        width="30"
-        height="100"
+        width={30}
+        height={100}
         src="https://s.udemycdn.com/partner-logos/volkswagen-logo.svg"
         alt="Volkswagen"
       />
       <Image
-        width="50"
-        height="100"
+        width={50}
+        height={100}
         src="https://s.udemycdn.com/partner-logos/v4/box-light.svg"
         alt="Box"
       />
       <Image
-        width="80"
-        height="100"
+        width={80}
+        height={100}
         src="https://s.udemycdn.com/partner-logos/v4/netapp-light.svg"
         alt="Netapp"
       />
       <Image
-        width="80"
-        height="100"
+        width={80}
+        height={100}
         src="https://s.udemycdn.com/partner-logos/v4/eventbrite-light.svg"
         alt="EventBrite"
       />

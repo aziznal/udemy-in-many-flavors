@@ -1,6 +1,9 @@
+import Link from "next/link";
+
 export default function Logo() {
   return (
-    <h1
+    <Link
+      href="/"
       className="
             relative 
             cursor-pointer 
@@ -20,6 +23,6 @@ export default function Logo() {
         "
     >
       Dontsueme
-    </h1>
+    </Link>
   );
 }

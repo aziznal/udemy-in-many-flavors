@@ -44,8 +44,8 @@ export default function Login() {
         <Image
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2008px-Google_%22G%22_Logo.svg.png"
           alt="Google"
-          width="30"
-          height="100"
+          width={30}
+          height={100}
         />
 
         <span>Continue with Google</span>
@@ -55,8 +55,8 @@ export default function Login() {
         <Image
           src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Facebook_Home_logo_old.svg"
           alt="Google"
-          width="30"
-          height="100"
+          width={30}
+          height={100}
         />
 
         <span>Continue with Facebook</span>
@@ -66,8 +66,8 @@ export default function Login() {
         <Image
           src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
           alt="Google"
-          width="30"
-          height="100"
+          width={30}
+          height={100}
         />
 
         <span>Continue with Apple</span>
@@ -120,7 +120,7 @@ export default function Login() {
 
         <hr className="my-2 border-zinc-300" />
 
-        <div className="text-sm flex flex-col gap-1">
+        <div className="flex flex-col gap-1 text-sm">
           <div>
             {"Don't have an account? "}
             <Link
