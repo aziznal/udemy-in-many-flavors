@@ -43,7 +43,7 @@ export default function Footer() {
 
 function CompanyLogoList() {
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-wrap gap-4">
       <Image
         width="100"
         height="100"
