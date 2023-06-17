@@ -13,9 +13,9 @@ export default function Logo() {
             before:h-[12px]
             before:w-[12px]
             before:rotate-[45deg]
-            before:border-l-[3px]
-            before:border-t-[3px]
-            before:border-purple-600
+            before:border-l-[4px]
+            before:border-t-[4px]
+            before:border-fuchsia-600
             before:content-['']
         "
     >
