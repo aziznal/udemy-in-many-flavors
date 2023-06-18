@@ -1,12 +1,6 @@
 "use client";
 
 import {
-  LoginRequest,
-  RegisterRequest,
-  sendLoginRequest,
-  sendRegisterRequest,
-} from "@/services/auth";
-import {
   ReactNode,
   createContext,
   useContext,
@@ -16,6 +10,13 @@ import {
 } from "react";
 
 import { getCookie, setCookie, deleteCookie } from "cookies-next";
+
+import {
+  LoginRequest,
+  RegisterRequest,
+  sendLoginRequest,
+  sendRegisterRequest,
+} from "@/services/auth-service";
 
 type AuthContextData = {
   isAuthenticated: boolean;
