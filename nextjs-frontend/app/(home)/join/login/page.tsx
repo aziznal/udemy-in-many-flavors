@@ -1,5 +1,11 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   Form,
   FormControl,
@@ -7,14 +13,10 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { useAuthContext } from "@/contexts/auth-context";
 
 const loginFormSchema = z.object({
   email: z.string().email({
@@ -28,12 +30,18 @@ const loginFormSchema = z.object({
 type LoginForm = z.infer<typeof loginFormSchema>;
 
 export default function Login() {
+  const { login } = useAuthContext();
+
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginFormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
-  const onFormSubmit = (values: LoginForm) => {
-    console.log(values);
+  const onFormSubmit = async (values: LoginForm) => {
+    await login(values);
   };
 
   return (

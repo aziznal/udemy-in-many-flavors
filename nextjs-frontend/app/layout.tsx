@@ -1,6 +1,8 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 
+import { AuthProvider } from "@/contexts/auth-context";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -13,7 +15,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en" className="h-100">
       <head>
@@ -30,7 +31,9 @@ export default function RootLayout({
         />
       </head>
 
-      <body className={`${inter.className} h-100`}>{children}</body>
+      <AuthProvider>
+        <body className={`${inter.className} h-100`}>{children}</body>
+      </AuthProvider>
     </html>
   );
 }

@@ -1,8 +1,18 @@
+"use client";
+
 import Link from "next/link";
 import { Button } from "./ui/button";
 import Logo from "./ui/logo";
+import { useAuthContext } from "@/contexts/auth-context";
+import { Skeleton } from "./ui/skeleton";
 
 export default function Header() {
+  const {
+    isAuthenticated,
+    isLoading: isLoadingAuth,
+    logout,
+  } = useAuthContext();
+
   return (
     <header className="flex h-[75px] w-full flex-row items-center gap-5 bg-white px-7 shadow-md">
       <Logo />
@@ -29,17 +39,44 @@ export default function Header() {
       </Button>
 
       <div className="flex flex-row items-center gap-2">
-        <Button variant={"outline"} asChild>
-          <Link href="/join/login">Log in</Link>
-        </Button>
+        {
+          isLoadingAuth && (
+            <div className="flex gap-2">
+              <Skeleton className="h-[40px] w-[80px]" />
+              <Skeleton className="h-[40px] w-[80px]" />
+              <Skeleton className="h-[40px] w-[40px] rounded-full" />
+            </div>
+          )
+        }
 
-        <Button>
-          <Link href="/join/register">Sign Up</Link>
-        </Button>
+        {!isLoadingAuth && (
+          <>
+            {isAuthenticated && (
+              <Button variant="outline" onClick={logout}>
+                Log out
+              </Button>
+            )}
 
-        <Button className="material-icons-outlined" variant={"outlineIcon"}>
-          language
-        </Button>
+            {!isAuthenticated && (
+              <>
+                <Button variant={"outline"} asChild>
+                  <Link href="/join/login">Log in</Link>
+                </Button>
+
+                <Button>
+                  <Link href="/join/register">Sign Up</Link>
+                </Button>
+
+                <Button
+                  className="material-icons-outlined"
+                  variant={"outlineIcon"}
+                >
+                  language
+                </Button>
+              </>
+            )}
+          </>
+        )}
       </div>
     </header>
   );
