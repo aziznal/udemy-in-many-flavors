@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useAuthContext } from "@/contexts/auth-context";
+import { useRouter } from "next/navigation";
 
 const loginFormSchema = z.object({
   email: z.string().email({
@@ -31,6 +32,7 @@ type LoginForm = z.infer<typeof loginFormSchema>;
 
 export default function Login() {
   const { login } = useAuthContext();
+  const router = useRouter();
 
   const form = useForm<LoginForm>({
     resolver: zodResolver(loginFormSchema),
@@ -42,6 +44,8 @@ export default function Login() {
 
   const onFormSubmit = async (values: LoginForm) => {
     await login(values);
+
+    router.push("/");
   };
 
   return (
