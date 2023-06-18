@@ -1,6 +1,11 @@
 "use client";
 
-import { LoginRequest, sendLoginRequest } from "@/services/auth";
+import {
+  LoginRequest,
+  RegisterRequest,
+  sendLoginRequest,
+  sendRegisterRequest,
+} from "@/services/auth";
 import {
   ReactNode,
   createContext,
@@ -16,6 +21,7 @@ type AuthContextData = {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (credentials: LoginRequest) => Promise<void>;
+  register: (credentials: RegisterRequest) => Promise<void>;
   logout: () => void;
 };
 
@@ -24,6 +30,7 @@ const AuthContext = createContext<AuthContextData>({
   isAuthenticated: false,
   isLoading: true,
   login: async () => {},
+  register: async () => {},
   logout: () => {},
 });
 
@@ -58,6 +65,20 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setAuthState(true);
   };
 
+  const register = async (credentials: RegisterRequest) => {
+    const result = await sendRegisterRequest(credentials);
+
+    if (!result.accessToken) {
+      throw new Error(
+        "authentication failed because you messed it up, you dummy."
+      );
+    }
+
+    setCookie(process.env.NEXT_PUBLIC_SESSION_COOKIE_NAME, result.accessToken);
+
+    setAuthState(true);
+  };
+
   const logout = () => {
     deleteCookie(process.env.NEXT_PUBLIC_SESSION_COOKIE_NAME);
 
@@ -68,6 +89,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     isAuthenticated,
     isLoading,
     login,
+    register,
     logout,
   };
 

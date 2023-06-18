@@ -16,6 +16,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
 import PasswordStrengthMeter from "@/components/PasswordStrengthMeter";
+import { useAuthContext } from "@/contexts/auth-context";
+import { useRouter } from "next/navigation";
 
 const registerFormSchema = z.object({
   fullname: z.string().min(2, {
@@ -32,6 +34,9 @@ const registerFormSchema = z.object({
 type RegisterForm = z.infer<typeof registerFormSchema>;
 
 export default function Register() {
+  const { register } = useAuthContext();
+  const router = useRouter();
+
   const form = useForm<RegisterForm>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -43,8 +48,10 @@ export default function Register() {
 
   const password = form.watch("password");
 
-  const onFormSubmit = (values: RegisterForm) => {
-    console.log(values);
+  const onFormSubmit = async (values: RegisterForm) => {
+    await register(values);
+
+    router.push("/");
   };
 
   return (
