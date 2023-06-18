@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from "axios";
-import { getCookie } from "cookies-next";
+import { cookies } from "next/headers";
 
-export const clientPublicBackendApi = axios.create({
+export const serverPublicBackendApi = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
@@ -9,8 +9,10 @@ export const clientPublicBackendApi = axios.create({
 });
 
 // This is a function to make sure the newest token is used every call
-export function clientAuthenticatedBackendApi(): AxiosInstance {
-  const accessToken = getCookie(process.env.NEXT_PUBLIC_SESSION_COOKIE_NAME);
+export function serverAuthenticatedBackendApi(): AxiosInstance {
+  const accessToken = cookies()
+    .get(process.env.NEXT_PUBLIC_SESSION_COOKIE_NAME)
+    ?.value;
 
   return axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_BASE_URL,

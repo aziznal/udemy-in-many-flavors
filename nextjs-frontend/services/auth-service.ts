@@ -1,4 +1,4 @@
-import { backendApi } from "@/api/client-api";
+import { clientPublicBackendApi } from "@/api/client-api";
 
 export type LoginRequest = {
   email: string;
@@ -20,7 +20,7 @@ export type RegisterResponse = {
 };
 
 export const sendLoginRequest = async (credentials: LoginRequest) => {
-  const response = await backendApi.post<LoginResponse>(
+  const response = await clientPublicBackendApi.post<LoginResponse>(
     "/auth/login",
     credentials
   );
@@ -29,7 +29,7 @@ export const sendLoginRequest = async (credentials: LoginRequest) => {
 };
 
 export const sendRegisterRequest = async (credentials: RegisterRequest) => {
-  const response = await backendApi.post<RegisterResponse>(
+  const response = await clientPublicBackendApi.post<RegisterResponse>(
     "/user",
     credentials
   );
