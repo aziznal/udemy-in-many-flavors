@@ -7,7 +7,7 @@ export default function Header() {
   const session = getServerSession();
 
   return (
-    <header className="flex h-[75px] w-full flex-row items-center gap-5 bg-white px-7 shadow-md">
+    <header className="flex h-[75px] w-full flex-row items-center gap-5 bg-white px-7 shadow-md z-10">
       <Logo />
 
       <div className="text-sm hover:cursor-pointer hover:text-violet-600">

@@ -10,7 +10,7 @@ export default function HomeLayout({
     <div className="flex min-h-full flex-col items-center justify-center">
       <Header />
 
-      <main className="flex flex-1">{children}</main>
+      <main className="flex flex-col flex-1">{children}</main>
 
       <Footer />
     </div>
