@@ -44,8 +44,64 @@ export default function Home() {
           god knows when
         </p>
 
-        <div>Card Grid</div>
+        <div className="grid grid-cols-5 gap-6 gap-y-16">
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+          <CourseCard></CourseCard>
+        </div>
       </div>
+    </div>
+  );
+}
+
+function CourseCard() {
+  return (
+    <div className="flex w-full cursor-pointer flex-col [&:hover>img]:brightness-[.85] [&>img]:transition [&>img]:duration-200">
+      <Image
+        src="https://img-c.udemycdn.com/course/240x135/2485240_d405_7.jpg"
+        className="border border-zinc-300"
+        width={900}
+        height={900}
+        alt="course"
+      />
+
+      <h2 className="text-md mt-2 h-[50px] overflow-hidden text-ellipsis font-bold">
+        Python: Master Programming and Development with 15...
+      </h2>
+
+      <span className="text-xs text-zinc-500">Dev Nirwal</span>
+
+      <div className="mt-1 flex items-center gap-1">
+        <span className="text-[14px] font-bold text-amber-700">4.3</span>
+
+        <div>
+          <span className="material-icons !text-sm text-amber-500">star</span>
+          <span className="material-icons !text-sm text-amber-500">star</span>
+          <span className="material-icons !text-sm text-amber-500">star</span>
+          <span className="material-icons !text-sm text-amber-500">star</span>
+          <span className="material-icons-outlined !text-sm text-amber-500">
+            grade
+          </span>
+        </div>
+
+        <span className="text-[11px] text-zinc-500">(13,309)</span>
+      </div>
+
+      <div className="mt-1 text-sm font-bold">₺249.99</div>
     </div>
   );
 }
