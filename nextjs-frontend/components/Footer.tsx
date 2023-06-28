@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="flex w-full flex-col bg-zinc-800 pb-7 pt-7 text-gray-200 [&>*:not(hr)]:px-12">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <span className="font-bold">
-          Top companies choose{" "}
+          Top companies choose
           <span className="text-purple-300">Udemy Business</span> to build
           in-demand career skills.
         </span>
@@ -81,85 +81,70 @@ function CompanyLogoList() {
 
 function SiteLinks() {
   return (
-    <ul className="flex flex-col flex-wrap gap-2 lg:flex-row lg:gap-[168px] [&>div]:flex [&>div]:flex-col [&>div]:gap-2 [&>div]:text-sm">
+    <ul className="flex flex-col flex-wrap gap-2 lg:flex-row lg:gap-[168px] [&>div>li:hover]:underline [&>div]:flex [&>div]:flex-col [&>div]:gap-2 [&>div]:text-sm">
       <div>
         <li>
-          {" "}
-          <Link href="#">Udemy Business</Link>{" "}
+          <Link href="#">Udemy Business</Link>
         </li>
 
         <li>
-          {" "}
-          <Link href="#">Teach on Udemy</Link>{" "}
+          <Link href="#">Teach on Udemy</Link>
         </li>
 
         <li>
-          {" "}
-          <Link href="#">Get the app</Link>{" "}
+          <Link href="#">Get the app</Link>
         </li>
 
         <li>
-          {" "}
-          <Link href="#">About us</Link>{" "}
+          <Link href="#">About us</Link>
         </li>
 
         <li>
-          {" "}
-          <Link href="#">Contact us</Link>{" "}
+          <Link href="#">Contact us</Link>
         </li>
       </div>
 
       <div>
         <li>
-          {" "}
-          <Link href="#">Careers</Link>{" "}
+          <Link href="#">Careers</Link>
         </li>
 
         <li>
-          {" "}
-          <Link href="#">Blog</Link>{" "}
+          <Link href="#">Blog</Link>
         </li>
 
         <li>
-          {" "}
-          <Link href="#">Help and Support</Link>{" "}
+          <Link href="#">Help and Support</Link>
         </li>
 
         <li>
-          {" "}
-          <Link href="#">Affiliate</Link>{" "}
+          <Link href="#">Affiliate</Link>
         </li>
 
         <li>
-          {" "}
-          <Link href="#">Investors</Link>{" "}
+          <Link href="#">Investors</Link>
         </li>
       </div>
 
       <div>
         <li>
-          {" "}
-          <Link href="#">Terms</Link>{" "}
+          <Link href="#">Terms</Link>
         </li>
 
         <li>
-          {" "}
-          <Link href="#">Privacy Policy</Link>{" "}
+          <Link href="#">Privacy Policy</Link>
         </li>
 
         <li>
-          {" "}
-          <Link href="#">Cookie settings</Link>{" "}
+          <Link href="#">Cookie settings</Link>
         </li>
 
         <li>
-          {" "}
-          <Link href="#">Sitemap</Link>{" "}
+          <Link href="#">Sitemap</Link>
         </li>
 
         <li>
-          {" "}
-          <Link href="#">Accessbility statement</Link>{" "}
+          <Link href="#">Accessbility statement</Link>
         </li>
       </div>
     </ul>
