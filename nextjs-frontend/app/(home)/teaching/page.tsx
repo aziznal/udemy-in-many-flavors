@@ -19,19 +19,11 @@ export default function Page_Teaching() {
 
       <HowToBeginTabs />
 
+      <Reviews />
+
       <YouWontHaveToDoItAlone />
 
-      <div className="flex h-[380px] w-full items-center justify-center bg-zinc-100 text-center mt-44">
-        <div className="flex w-[570px] flex-col items-center justify-center gap-4">
-          <h1 className="font-serif text-5xl font-bold">
-            Become an instructor today
-          </h1>
-
-          <p className="text-2xl">{`Join one of the world's largest online learning marketplaces`}</p>
-
-          <Button className="w-[50%]">Get Started</Button>
-        </div>
-      </div>
+      <GetStartedFooter />
     </div>
   );
 }
@@ -151,7 +143,10 @@ const StatsBanner = () => {
 
 const HowToBeginTabs = () => {
   return (
-    <Tabs defaultValue="account" className="mt-12 flex flex-col items-center">
+    <Tabs
+      defaultValue="plan-your-curriculum"
+      className="mt-12 flex flex-col items-center"
+    >
       <TabsList>
         <TabsTrigger value="plan-your-curriculum">
           Plan your curriculum
@@ -251,9 +246,42 @@ const HowToBeginTabs = () => {
   );
 };
 
+const Reviews = () => {
+  return (
+    <div className="flex w-full items-center justify-center bg-zinc-100">
+      <div className="relative flex w-[850px] items-center justify-center gap-8">
+        <Image
+          src="https://s.udemycdn.com/teaching/instructors/en/frank-1x-v2.jpg"
+          width={400}
+          height={400}
+          alt="image"
+        />
+
+        <div>
+          <p className="text-2xl leading-8">
+            {`“I’m proud to wake up knowing my work is helping people around the
+            world improve their careers and build great things. While being a
+            full-time instructor is hard work, it lets you work when, where, and
+            how you want.”`}
+          </p>
+
+          <span className="mt-4 block text-sm font-bold">Frank Kane</span>
+          <span className="mt-2 block text-sm text-zinc-500">
+            Data Science & IT Certifications
+          </span>
+        </div>
+
+        <span className="absolute -right-14 flex h-12 w-12 -translate-y-3 cursor-pointer items-center justify-center rounded-full border border-zinc-600 bg-zinc-900 text-white hover:bg-zinc-800">
+          <span className="material-icons !text-[32px]">chevron_right</span>
+        </span>
+      </div>
+    </div>
+  );
+};
+
 const YouWontHaveToDoItAlone = () => {
   return (
-    <div className="flex w-full items-center justify-around">
+    <div className="mt-32 flex w-full flex-wrap items-center justify-around">
       <Image
         src="https://s.udemycdn.com/teaching/support-1-v3.jpg"
         width={480}
@@ -284,6 +312,22 @@ const YouWontHaveToDoItAlone = () => {
         height={480}
         alt="image"
       />
+    </div>
+  );
+};
+
+const GetStartedFooter = () => {
+  return (
+    <div className="mt-44 flex h-[380px] w-full items-center justify-center bg-zinc-100 text-center">
+      <div className="flex w-[570px] flex-col items-center justify-center gap-4">
+        <h1 className="font-serif text-5xl font-bold">
+          Become an instructor today
+        </h1>
+
+        <p className="text-2xl">{`Join one of the world's largest online learning marketplaces`}</p>
+
+        <Button className="w-[50%]">Get Started</Button>
+      </div>
     </div>
   );
 };
