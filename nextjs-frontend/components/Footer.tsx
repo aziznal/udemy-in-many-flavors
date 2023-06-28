@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="flex w-full flex-col bg-zinc-800 pb-7 pt-7 text-gray-200 [&>*:not(hr)]:px-12">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <span className="font-bold">
-          Top companies choose
+          Top companies choose{" "}
           <span className="text-purple-300">Udemy Business</span> to build
           in-demand career skills.
         </span>
