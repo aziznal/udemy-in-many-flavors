@@ -88,7 +88,7 @@ function SiteLinks() {
         </li>
 
         <li>
-          <Link href="#">Teach on Udemy</Link>
+          <Link href="/teaching">Teach on Udemy</Link>
         </li>
 
         <li>

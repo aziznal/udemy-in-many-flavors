@@ -2,12 +2,13 @@ import { Button } from "./ui/button";
 import Logo from "./ui/logo";
 import TopRightCorner from "./Header/TopRightCorner";
 import { getServerSession } from "@/utils/get-server-session";
+import Link from "next/link";
 
 export default function Header() {
   const session = getServerSession();
 
   return (
-    <header className="flex h-[75px] w-full flex-row items-center gap-5 bg-white px-7 shadow-md z-10">
+    <header className="z-10 flex h-[75px] w-full flex-row items-center gap-5 bg-white px-7 shadow-md">
       <Logo />
 
       <div className="text-sm hover:cursor-pointer hover:text-violet-600">
@@ -23,9 +24,12 @@ export default function Header() {
         />
       </div>
 
-      <div className="text-sm hover:cursor-pointer hover:text-violet-600">
+      <Link
+        href="/teaching"
+        className="text-sm hover:cursor-pointer hover:text-violet-600"
+      >
         Teach on Udemy
-      </div>
+      </Link>
 
       <Button className="material-icons-outlined" variant={"icon"}>
         shopping_cart
