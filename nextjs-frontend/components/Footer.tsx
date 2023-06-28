@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 
 export default function Footer() {
   return (
-    <footer className="flex w-full flex-col bg-zinc-800 pb-7 pt-7 text-gray-200 [&>*:not(hr)]:px-12">
+    <footer className="flex w-full flex-col bg-zinc-900 pb-7 pt-7 text-gray-200 [&>*:not(hr)]:px-12">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <span className="font-bold">
           Top companies choose{" "}
