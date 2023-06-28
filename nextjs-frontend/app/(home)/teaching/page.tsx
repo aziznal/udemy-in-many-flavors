@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
 
 export default function Page_Teaching() {
@@ -16,7 +17,21 @@ export default function Page_Teaching() {
 
       <h1 className="font-serif text-5xl font-bold">How to begin</h1>
 
-      <div className="pb-48"></div>
+      <HowToBeginTabs />
+
+      <YouWontHaveToDoItAlone />
+
+      <div className="flex h-[380px] w-full items-center justify-center bg-zinc-100 text-center mt-44">
+        <div className="flex w-[570px] flex-col items-center justify-center gap-4">
+          <h1 className="font-serif text-5xl font-bold">
+            Become an instructor today
+          </h1>
+
+          <p className="text-2xl">{`Join one of the world's largest online learning marketplaces`}</p>
+
+          <Button className="w-[50%]">Get Started</Button>
+        </div>
+      </div>
     </div>
   );
 }
@@ -130,6 +145,145 @@ const StatsBanner = () => {
         <h3 className="text-[2.5rem] font-bold leading-[2.5rem]">13,400+</h3>
         <span>Enterprise Customers</span>
       </div>
+    </div>
+  );
+};
+
+const HowToBeginTabs = () => {
+  return (
+    <Tabs defaultValue="account" className="mt-12 flex flex-col items-center">
+      <TabsList>
+        <TabsTrigger value="plan-your-curriculum">
+          Plan your curriculum
+        </TabsTrigger>
+
+        <TabsTrigger value="record-your-video">Record your video</TabsTrigger>
+
+        <TabsTrigger value="launch-your-course">Launch your course</TabsTrigger>
+      </TabsList>
+
+      <div className="mt-6 w-[850px] [&>*]:flex [&>*]:w-full [&>*]:items-center [&>*]:justify-between">
+        <TabsContent value="plan-your-curriculum">
+          <div className="flex flex-col gap-2 text-lg">
+            <p>
+              You start with your passion and knowledge. Then choose a promising
+              topic with the help of our Marketplace Insights tool.
+            </p>
+
+            <p>The way that you teach — what you bring to it — is up to you.</p>
+
+            <h2 className="mt-2 text-lg font-bold">How we help you</h2>
+
+            <p>
+              We offer plenty of resources on how to create your first course.
+              And, our instructor dashboard and curriculum pages help keep you
+              organized.
+            </p>
+          </div>
+
+          <Image
+            src="https://s.udemycdn.com/teaching/plan-your-curriculum-v3.jpg"
+            width={480}
+            height={480}
+            alt="image"
+          />
+        </TabsContent>
+
+        <TabsContent value="record-your-video">
+          <div className="flex flex-col gap-2 text-lg">
+            <p>
+              Use basic tools like a smartphone or a DSLR camera. Add a good
+              microphone and you’re ready to start.
+            </p>
+
+            <p>
+              If you don’t like being on camera, just capture your screen.
+              Either way, we recommend two hours or more of video for a paid
+              course.
+            </p>
+
+            <h2 className="mt-2 text-lg font-bold">How we help you</h2>
+
+            <p>
+              Our support team is available to help you throughout the process
+              and provide feedback on test videos.
+            </p>
+          </div>
+
+          <Image
+            src="https://s.udemycdn.com/teaching/record-your-video-v3.jpg"
+            width={480}
+            height={480}
+            alt="image"
+          />
+        </TabsContent>
+
+        <TabsContent value="launch-your-course">
+          <div className="flex flex-col gap-2 text-lg">
+            <p>
+              Gather your first ratings and reviews by promoting your course
+              through social media and your professional networks.
+            </p>
+
+            <p>
+              Your course will be discoverable in our marketplace where you earn
+              revenue from each paid enrollment.
+            </p>
+
+            <h2 className="mt-2 text-lg font-bold">How we help you</h2>
+
+            <p>
+              Our custom coupon tool lets you offer enrollment incentives while
+              our global promotions drive traffic to courses. There’s even more
+              opportunity for courses chosen for Udemy Business.
+            </p>
+          </div>
+
+          <Image
+            src="https://s.udemycdn.com/teaching/launch-your-course-v3.jpg"
+            width={480}
+            height={480}
+            alt="image"
+          />
+        </TabsContent>
+      </div>
+    </Tabs>
+  );
+};
+
+const YouWontHaveToDoItAlone = () => {
+  return (
+    <div className="flex w-full items-center justify-around">
+      <Image
+        src="https://s.udemycdn.com/teaching/support-1-v3.jpg"
+        width={480}
+        height={480}
+        alt="image"
+      />
+
+      <div className="w-[600px] text-center">
+        <h1 className="font-serif text-5xl font-bold">{`You won't have to do it alone`}</h1>
+
+        <p className="mt-4 text-lg">
+          Our <span className="font-bold">Instructor Support Team</span> is here
+          to answer your questions and review your test video, while our
+          <span className="font-bold">Teaching Center</span> gives you plenty of
+          resources to help you through the process. Plus, get the support of
+          experienced instructors in our{" "}
+          <span className="font-bold">online community</span>.
+        </p>
+
+        <span className="mt-8 block font-bold text-violet-800 underline underline-offset-4">
+          Need more details before you start? Learn more.
+        </span>
+      </div>
+
+      <Image
+        src="https://s.udemycdn.com/teaching/support-2-v3.jpg"
+        width={480}
+        height={480}
+        alt="image"
+      />
     </div>
   );
 };
