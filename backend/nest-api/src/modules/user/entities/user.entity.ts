@@ -1,6 +1,6 @@
 import { BaseEntity } from 'src/modules/common/entities/base.entity';
 import { Course } from 'src/modules/course/entities/course.entity';
-import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from 'typeorm';
 
 @Entity({
   name: 'user',
@@ -21,6 +21,15 @@ export class User extends BaseEntity {
   })
   fullname: string;
 
-  @OneToMany(() => User, (course: Course) => course.user)
-  courses: Course;
+  @Column({
+    type: 'boolean',
+    default: false,
+  })
+  isInstructor: boolean;
+
+  @OneToMany(() => User, (course: Course) => course.creator)
+  createdCourses: Course[];
+
+  @ManyToMany(() => User, (course: Course) => course.creator)
+  enrolledCourses: Course[];
 }
