@@ -3,6 +3,7 @@ import { UserService } from '../user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/login.dto';
 import { User } from '../user/entities/user.entity';
+import { JwtTokenPayload } from 'src/global-types/jwt-token-payload.type';
 
 @Injectable()
 export class AuthService {
@@ -61,6 +62,9 @@ export class AuthService {
   }
 
   async #createToken(user: User): Promise<string> {
-    return this.jwtService.signAsync({ email: user.email });
+    return this.jwtService.signAsync({
+      email: user.email,
+      isInstructor: user.isInstructor,
+    } satisfies JwtTokenPayload);
   }
 }

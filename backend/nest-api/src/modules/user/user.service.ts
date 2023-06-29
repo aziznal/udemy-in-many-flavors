@@ -56,4 +56,8 @@ export class UserService {
       accessToken: token,
     };
   }
+
+  async setAsInstructor({ userEmail }: { userEmail: string }) {
+    await this.userRepository.update({ email: userEmail }, { isInstructor: true });
+  }
 }
