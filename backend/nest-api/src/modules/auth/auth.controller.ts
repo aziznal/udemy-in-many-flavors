@@ -1,9 +1,8 @@
 import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
-
-import { Request } from 'express';
 import { AuthGuard } from './auth.guard';
+import { RequestWithAuth } from 'src/global-types/request-with-auth.type';
 
 @Controller('auth')
 export class AuthController {
@@ -16,8 +15,11 @@ export class AuthController {
 
   @Post('verify')
   @UseGuards(AuthGuard)
-  verify(@Req() req: Request) {
+  verify(@Req() req: RequestWithAuth) {
     const token = req.headers['authorization']?.split(' ')[1];
+
+    if (!token) return false;
+
     return this.authService.verifyToken(token);
   }
 }

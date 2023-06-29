@@ -7,14 +7,11 @@ import { Column, Entity, OneToMany, Unique } from 'typeorm';
 @Unique(['name'])
 export class Category extends BaseEntity {
   @Column({ type: 'text' })
-  name: string;
+  name!: string;
 
   @OneToMany(() => Course, (course: Course) => course.category)
-  courses: Course[];
+  courses!: Course[];
 
-  @OneToMany(
-    () => Subcategory,
-    (subcategory: Subcategory) => subcategory.category,
-  )
-  subcategories: Subcategory[];
+  @OneToMany(() => Subcategory, (subcategory: Subcategory) => subcategory.category)
+  subcategories!: Subcategory[];
 }

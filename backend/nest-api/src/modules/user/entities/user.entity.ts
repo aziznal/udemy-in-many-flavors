@@ -9,27 +9,27 @@ export class User extends BaseEntity {
   @PrimaryColumn({
     type: 'text',
   })
-  email: string;
+  email!: string;
 
   @Column({
     type: 'text',
   })
-  password: string;
+  password!: string;
 
   @Column({
     type: 'text',
   })
-  fullname: string;
+  fullname!: string;
 
   @Column({
     type: 'boolean',
     default: false,
   })
-  isInstructor: boolean;
+  isInstructor!: boolean;
 
   @OneToMany(() => User, (course: Course) => course.creator)
-  createdCourses: Course[];
+  createdCourses!: Course[];
 
   @ManyToMany(() => User, (course: Course) => course.creator)
-  enrolledCourses: Course[];
+  enrolledCourses!: Course[];
 }

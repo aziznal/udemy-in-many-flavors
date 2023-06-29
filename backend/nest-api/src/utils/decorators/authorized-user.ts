@@ -1,13 +1,14 @@
 import { createParamDecorator, ExecutionContext, UnauthorizedException } from '@nestjs/common';
 import { decode } from 'jsonwebtoken';
 import { JwtTokenPayload, JwtTokenPayloadSchema } from 'src/global-types/jwt-token-payload.type';
+import { RequestWithAuth } from 'src/global-types/request-with-auth.type';
 
 export const TO_MILLISECONDS = 1000;
 
 export const AuthorizedUser = createParamDecorator<never, never, JwtTokenPayload>((_data, ctx: ExecutionContext) => {
-  const request = ctx.switchToHttp().getRequest<Request & { headers: { authorization?: string } }>();
+  const request = ctx.switchToHttp().getRequest<RequestWithAuth>();
 
-  if (!request.headers.authorization) return;
+  if (!request.headers.authorization) throw new UnauthorizedException('missing jwt');
 
   try {
     const rawToken = decode(request.headers.authorization.replace('Bearer ', ''));

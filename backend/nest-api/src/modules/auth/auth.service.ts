@@ -65,6 +65,6 @@ export class AuthService {
     return this.jwtService.signAsync({
       email: user.email,
       isInstructor: user.isInstructor,
-    } satisfies JwtTokenPayload);
+    } satisfies Omit<JwtTokenPayload, 'iat' | 'exp'>);
   }
 }

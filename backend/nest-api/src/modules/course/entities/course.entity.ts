@@ -7,26 +7,26 @@ import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 @Entity()
 export class Course extends BaseEntity {
   @ManyToOne(() => Course, (user: User) => user.createdCourses)
-  creator: User;
+  creator!: User;
 
   @ManyToMany(() => Course, (user: User) => user.enrolledCourses)
-  enrolledUsers: User[];
+  enrolledUsers!: User[];
 
   @Column({ type: 'text' })
-  title: string;
+  title!: string;
 
   @Column({ type: 'text' })
-  subtitle: string;
+  subtitle!: string;
 
   @Column({ type: 'text' })
-  description: string;
+  description!: string;
 
   @Column({ type: 'text' })
-  price: number;
+  price!: number;
 
   @ManyToOne(() => Category, (category: Category) => category.courses)
-  category: Category;
+  category!: Category;
 
   @OneToMany(() => Section, (section: Section) => section.course)
-  sections: Course;
+  sections!: Course;
 }

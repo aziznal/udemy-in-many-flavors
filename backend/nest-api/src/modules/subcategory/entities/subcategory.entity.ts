@@ -6,8 +6,8 @@ import { Column, Entity, ManyToOne, Unique } from 'typeorm';
 @Unique(['name'])
 export class Subcategory extends BaseEntity {
   @Column({ type: 'text' })
-  name: string;
+  name!: string;
 
   @ManyToOne(() => Category, (category: Category) => category.subcategories)
-  category: Category;
+  category!: Category;
 }

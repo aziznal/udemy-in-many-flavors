@@ -13,7 +13,7 @@ import { CategoryModule } from './modules/category/category.module';
 import { SubcategoryModule } from './modules/subcategory/subcategory.module';
 import { SectionModule } from './modules/section/section.module';
 import { CurriculumItemModule } from './modules/curriculum-item/curriculum-item.module';
-import { JwtModule, JwtService } from '@nestjs/jwt';
+import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
@@ -28,11 +28,11 @@ import { AuthModule } from './modules/auth/auth.module';
       useFactory: (configService: ConfigService<EnvConfig>) => {
         return {
           type: 'postgres',
-          host: configService.get<DbConfig>('db').host,
-          port: configService.get<DbConfig>('db').port,
-          username: configService.get<DbConfig>('db').username,
-          password: configService.get<DbConfig>('db').password,
-          database: configService.get<DbConfig>('db').database,
+          host: configService.get<DbConfig>('db')!.host,
+          port: configService.get<DbConfig>('db')!.port,
+          username: configService.get<DbConfig>('db')!.username,
+          password: configService.get<DbConfig>('db')!.password,
+          database: configService.get<DbConfig>('db')!.database,
           autoLoadEntities: true,
           synchronize: true,
         };

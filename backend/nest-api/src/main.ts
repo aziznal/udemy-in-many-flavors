@@ -9,7 +9,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const configService = app.get(ConfigService<EnvConfig>);
-  const nestPort = configService.get<NestConfig>('nest').port;
+  const nestPort = configService.get<NestConfig>('nest')!.port;
   const nodeEnv = configService.get('nodeEnv');
 
   // enable cors
@@ -35,15 +35,9 @@ async function bootstrap() {
 
   await app.listen(nestPort);
 
-  Logger.log(
-    `🚀🚀🚀 nest is running in ${nodeEnv} mode on port ${nestPort}`,
-    'Bootstrap',
-  );
+  Logger.log(`🚀🚀🚀 nest is running in ${nodeEnv} mode on port ${nestPort}`, 'Bootstrap');
 
-  Logger.log(
-    `You can see the api docs on http://localhost:${nestPort}/docs`,
-    'Bootstrap',
-  );
+  Logger.log(`You can see the api docs on http://localhost:${nestPort}/docs`, 'Bootstrap');
 }
 
 bootstrap();

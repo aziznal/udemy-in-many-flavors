@@ -6,17 +6,14 @@ import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 @Entity()
 export class Section extends BaseEntity {
   @Column({ type: 'text' })
-  title: string;
+  title!: string;
 
   @Column({ type: 'text' })
-  learningObjective: string;
+  learningObjective!: string;
 
   @ManyToOne(() => Course, (course: Course) => course.sections)
-  course: Course;
+  course!: Course;
 
-  @OneToMany(
-    () => CurriculumItem,
-    (curriculumItem: CurriculumItem) => curriculumItem.section,
-  )
-  curriculumItems: CurriculumItem[];
+  @OneToMany(() => CurriculumItem, (curriculumItem: CurriculumItem) => curriculumItem.section)
+  curriculumItems!: CurriculumItem[];
 }

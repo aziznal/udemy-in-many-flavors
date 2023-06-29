@@ -22,14 +22,14 @@ export enum CurriculumItemType {
 })
 export class CurriculumItem extends BaseEntity {
   @ManyToOne(() => Section, (section: Section) => section.curriculumItems)
-  section: Section;
+  section!: Section;
 }
 
 @Entity()
 export class Lecture extends CurriculumItem {
   @Column({ type: 'text' })
-  title: string;
+  title!: string;
 
   @Column({ type: 'text' })
-  description: string;
+  description!: string;
 }
