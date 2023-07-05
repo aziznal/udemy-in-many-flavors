@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import InstructorSidenav from "@/components/instructor-sidenav/instructor-sidenav";
+import Link from "next/link";
 import { PropsWithChildren } from "react";
 
 export default function Layout_Instructor({ children }: PropsWithChildren) {
@@ -8,13 +9,19 @@ export default function Layout_Instructor({ children }: PropsWithChildren) {
       <div className="w-full flex-1 ">
         <InstructorSidenav className="fixed left-0 top-0 z-[2] h-full shrink-0" />
 
-        <main className="z-[1] flex flex-1 flex-col">
-          <header></header>
+        <div className="z-[1] flex flex-1 flex-col">
+          <header className="flex items-center justify-end gap-5 px-7 py-4 text-sm">
+            <Link href="/">Student</Link>
 
-          <div className="ml-72 mr-60 flex flex-col items-center">
-            {children}
-          </div>
-        </main>
+            <span className="material-icons-outlined">notifications</span>
+
+            <span className="material-icons-outlined !text-4xl">
+              account_circle
+            </span>
+          </header>
+
+          <main className="ml-64 mr-60 mt-2 flex flex-col">{children}</main>
+        </div>
       </div>
 
       <Footer className="z-[3]" />
