@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Page_Teaching() {
   return (
@@ -47,7 +48,9 @@ const TeachingHeader = () => {
             Become an instructor and change lives — including your own
           </p>
 
-          <Button>Get Started</Button>
+          <Button asChild>
+            <Link href="/instructor/courses">Get Started</Link>
+          </Button>
         </div>
       </div>
     </>
@@ -326,7 +329,9 @@ const GetStartedFooter = () => {
 
         <p className="text-2xl">{`Join one of the world's largest online learning marketplaces`}</p>
 
-        <Button className="w-[50%]">Get Started</Button>
+        <Button className="w-[50%]" asChild>
+          <Link href="/instructor/courses">Get Started</Link>
+        </Button>
       </div>
     </div>
   );

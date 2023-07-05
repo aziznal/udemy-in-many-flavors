@@ -3,10 +3,18 @@ import Link from "next/link";
 
 import Logo from "./ui/logo";
 import { Button } from "./ui/button";
+import { forwardRef } from "react";
 
-export default function Footer() {
+const Footer = forwardRef<
+  HTMLElement,
+  React.HtmlHTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => {
   return (
-    <footer className="flex w-full flex-col bg-zinc-900 pb-7 pt-7 text-gray-200 [&>*:not(hr)]:px-12">
+    <footer
+      ref={ref}
+      {...props}
+      className={`flex w-full flex-col border-t border-zinc-700 bg-zinc-900 pb-7 pt-7 text-gray-200 [&>*:not(hr)]:px-12 ${className}`}
+    >
       <div className="flex flex-wrap items-center justify-between gap-4">
         <span className="font-bold">
           Top companies choose{" "}
@@ -40,7 +48,11 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+});
+
+Footer.displayName = "Footer";
+
+export default Footer;
 
 function CompanyLogoList() {
   return (
