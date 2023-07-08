@@ -26,7 +26,7 @@ export default function Page_Courses() {
 
             <Button
               variant="icon"
-              className="h-full w-[48px] bg-zinc-900 text-white"
+              className="h-full w-[48px] bg-zinc-900 text-white hover:text-white"
             >
               <span className="material-icons">search</span>
             </Button>
@@ -55,10 +55,43 @@ export default function Page_Courses() {
         </Button>
       </div>
 
+      {/* course list */}
+      <div className="mt-6 flex flex-col gap-4">
+        <div className="flex items-center justify-between border border-zinc-300">
+          <div className="flex">
+            <Image
+              width={118}
+              height={118}
+              src="https://s.udemycdn.com/course/200_H/placeholder.jpg"
+              alt="Course Image"
+            />
+
+            <div className="flex flex-col justify-between p-4">
+              <span className="font-bold">Course</span>
+              <div className="text-xs flex items-center gap-2">
+                <span className="font-bold">DRAFT</span>
+                <span className="">Public</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="mt-16 flex items-center justify-center">
         <LoadingSpinner size={72} />
       </div>
 
+      <InformationalSection />
+
+      {/* spacer */}
+      <div className="pb-52"></div>
+    </>
+  );
+}
+
+function InformationalSection() {
+  return (
+    <>
       <div className="my-20 flex justify-center">
         Based on your experience, we think these resources will be helpful.
       </div>
@@ -244,12 +277,11 @@ export default function Page_Courses() {
             Help and Support
           </Link>
 
-          <p className="mt-5 text-sm">Browse our Help Center or contact our support team</p>
+          <p className="mt-5 text-sm">
+            Browse our Help Center or contact our support team
+          </p>
         </div>
       </div>
-
-      {/* spacer */}
-      <div className="pb-52"></div>
     </>
   );
 }
