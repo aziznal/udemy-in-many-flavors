@@ -9,24 +9,24 @@ export class Course extends BaseEntity {
   @ManyToOne(() => Course, (user: User) => user.createdCourses)
   creator!: User;
 
-  @ManyToMany(() => Course, (user: User) => user.enrolledCourses)
-  enrolledUsers!: User[];
-
   @Column({ type: 'text' })
   title!: string;
 
-  @Column({ type: 'text' })
-  subtitle!: string;
+  @ManyToMany(() => Course, (user: User) => user.enrolledCourses, { nullable: true })
+  enrolledUsers?: User[];
 
-  @Column({ type: 'text' })
-  description!: string;
+  @Column({ type: 'text', nullable: true })
+  subtitle?: string;
 
-  @Column({ type: 'text' })
-  price!: number;
+  @Column({ type: 'text', nullable: true })
+  description?: string;
 
-  @ManyToOne(() => Category, (category: Category) => category.courses)
-  category!: Category;
+  @Column({ type: 'text', nullable: true })
+  price?: number;
 
-  @OneToMany(() => Section, (section: Section) => section.course)
-  sections!: Course;
+  @ManyToOne(() => Category, (category: Category) => category.courses, { nullable: true })
+  category?: Category;
+
+  @OneToMany(() => Section, (section: Section) => section.course, { nullable: true })
+  sections?: Section[];
 }

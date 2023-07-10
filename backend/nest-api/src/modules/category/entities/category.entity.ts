@@ -9,9 +9,9 @@ export class Category extends BaseEntity {
   @Column({ type: 'text' })
   name!: string;
 
-  @OneToMany(() => Course, (course: Course) => course.category)
-  courses!: Course[];
+  @OneToMany(() => Course, (course: Course) => course.category, { nullable: true })
+  courses?: Course[];
 
-  @OneToMany(() => Subcategory, (subcategory: Subcategory) => subcategory.category)
-  subcategories!: Subcategory[];
+  @OneToMany(() => Subcategory, (subcategory: Subcategory) => subcategory.category, { nullable: true })
+  subcategories?: Subcategory[];
 }

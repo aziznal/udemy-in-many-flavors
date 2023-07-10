@@ -27,9 +27,9 @@ export class User extends BaseEntity {
   })
   isInstructor!: boolean;
 
-  @OneToMany(() => User, (course: Course) => course.creator)
-  createdCourses!: Course[];
+  @OneToMany(() => User, (course: Course) => course.creator, { nullable: true })
+  createdCourses?: Course[];
 
-  @ManyToMany(() => User, (course: Course) => course.creator)
-  enrolledCourses!: Course[];
+  @ManyToMany(() => User, (course: Course) => course.creator, { nullable: true })
+  enrolledCourses?: Course[];
 }
