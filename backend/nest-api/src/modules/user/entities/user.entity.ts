@@ -30,6 +30,6 @@ export class User extends BaseEntity {
   @OneToMany(() => User, (course: Course) => course.creator, { nullable: true })
   createdCourses?: Course[];
 
-  @ManyToMany(() => User, (course: Course) => course.creator, { nullable: true })
+  @ManyToMany(() => User, (course: Course) => course.creator, { nullable: true, cascade: true })
   enrolledCourses?: Course[];
 }

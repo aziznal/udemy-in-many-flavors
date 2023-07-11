@@ -12,7 +12,7 @@ import { CourseModule } from './modules/course/course.module';
 import { CategoryModule } from './modules/category/category.module';
 import { SubcategoryModule } from './modules/subcategory/subcategory.module';
 import { SectionModule } from './modules/section/section.module';
-import { CurriculumItemModule } from './modules/curriculum-item/curriculum-item.module';
+import { LectureModule } from './modules/lecture/lecture.module';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthModule } from './modules/auth/auth.module';
 
@@ -60,7 +60,7 @@ import { AuthModule } from './modules/auth/auth.module';
     CategoryModule,
     SubcategoryModule,
     SectionModule,
-    CurriculumItemModule,
+    LectureModule,
   ],
   controllers: [AppController],
   providers: [AppService],

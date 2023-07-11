@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Lecture } from './entities/curriculum-item.entity';
+import { Lecture } from './entities/lecture.entity';
 import { DataSource, Repository } from 'typeorm';
 import { NewLectureDto } from './dto/new-lecture.dto';
 import { UpdatedLectureDto } from './dto/updated-lecture.dto';
