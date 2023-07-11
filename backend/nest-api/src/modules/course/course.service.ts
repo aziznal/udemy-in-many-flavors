@@ -85,8 +85,10 @@ export class CourseService {
       await queryRunner.rollbackTransaction();
 
       // if unknown error
-      if (!(error instanceof NotFoundException))
+      if (!(error instanceof NotFoundException)) {
+        console.error(error);
         throw new InternalServerErrorException('Something went wrong while updating course');
+      }
 
       throw error;
     } finally {
