@@ -1,4 +1,13 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { NewCategoryDto } from './dto/new-category.dto';
 import { UpdatedCategoryDto } from './dto/updated-category.dto';
 import { CategoryService } from './category.service';
@@ -26,7 +35,10 @@ export class CategoryController {
   }
 
   @Patch(':id')
-  async update(@Body() updatedCategoryDto: UpdatedCategoryDto, @Param() id?: string): Promise<void> {
+  async update(
+    @Body() updatedCategoryDto: UpdatedCategoryDto,
+    @Param() id?: string,
+  ): Promise<void> {
     if (!id) throw new BadRequestException('id is required (/category/<your-id-here>)');
 
     return this.categoryService.update({

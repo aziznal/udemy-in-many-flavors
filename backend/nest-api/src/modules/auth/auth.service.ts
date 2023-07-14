@@ -14,14 +14,16 @@ export class AuthService {
       email: loginEmail,
     });
 
-    if (!matchedUser) throw new NotFoundException('No user exists with the given username and password');
+    if (!matchedUser)
+      throw new NotFoundException('No user exists with the given username and password');
 
     const isPasswordMatching = await this.#checkPasswordsMatch({
       password: loginPassword,
       storedPassword: matchedUser.password,
     });
 
-    if (!isPasswordMatching) throw new NotFoundException('No user exists with the given username and password');
+    if (!isPasswordMatching)
+      throw new NotFoundException('No user exists with the given username and password');
 
     const token = await this.#createToken(matchedUser);
 

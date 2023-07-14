@@ -34,7 +34,13 @@ export class CategoryService {
     return newCategory;
   }
 
-  async update({ id, updatedCategoryDto }: { id: string; updatedCategoryDto: UpdatedCategoryDto }): Promise<void> {
+  async update({
+    id,
+    updatedCategoryDto,
+  }: {
+    id: string;
+    updatedCategoryDto: UpdatedCategoryDto;
+  }): Promise<void> {
     try {
       await this.findOne(id);
     } catch (e: unknown) {
@@ -43,7 +49,8 @@ export class CategoryService {
 
     const result = await this.categoryRepo.update({ id: id }, updatedCategoryDto);
 
-    if (!result.affected) throw new InternalServerErrorException('Something went wrong while updating category!');
+    if (!result.affected)
+      throw new InternalServerErrorException('Something went wrong while updating category!');
   }
 
   async delete(id: string) {
@@ -55,6 +62,7 @@ export class CategoryService {
 
     const result = await this.categoryRepo.delete({ id: id });
 
-    if (!result.affected) throw new InternalServerErrorException('Something went wrong while deleting category!');
+    if (!result.affected)
+      throw new InternalServerErrorException('Something went wrong while deleting category!');
   }
 }

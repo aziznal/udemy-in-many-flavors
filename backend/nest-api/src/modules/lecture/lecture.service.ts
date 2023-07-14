@@ -42,7 +42,10 @@ export class LectureService {
     await queryRunner.startTransaction();
 
     try {
-      const simpleUpdatedLecture = await queryRunner.manager.preload(Lecture, { id, ...simpleFields });
+      const simpleUpdatedLecture = await queryRunner.manager.preload(Lecture, {
+        id,
+        ...simpleFields,
+      });
 
       if (!simpleUpdatedLecture) {
         throw new NotFoundException('Cannot updated Lecture as it was not found');

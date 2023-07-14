@@ -12,6 +12,8 @@ export class Category extends BaseEntity {
   @OneToMany(() => Course, (course: Course) => course.category, { nullable: true })
   courses?: Course[];
 
-  @OneToMany(() => Subcategory, (subcategory: Subcategory) => subcategory.category, { nullable: true })
+  @OneToMany(() => Subcategory, (subcategory: Subcategory) => subcategory.category, {
+    nullable: true,
+  })
   subcategories?: Subcategory[];
 }

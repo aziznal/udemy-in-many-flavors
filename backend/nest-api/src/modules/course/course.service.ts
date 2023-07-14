@@ -49,19 +49,25 @@ export class CourseService {
     await queryRunner.startTransaction();
 
     try {
-      const { sections: updatedSections, categoryId: updatedCategoryId, ...simpleFields } = updatedCourseDto;
+      const {
+        sections: updatedSections,
+        categoryId: updatedCategoryId,
+        ...simpleFields
+      } = updatedCourseDto;
 
       // first update simple fields
       const simpleUpdatedCourse = await this.courseRepo.preload({ id, ...simpleFields });
 
-      if (!simpleUpdatedCourse) throw new NotFoundException('Cannot update course with given id as it was not found');
+      if (!simpleUpdatedCourse)
+        throw new NotFoundException('Cannot update course with given id as it was not found');
 
       await this.courseRepo.save(simpleUpdatedCourse);
 
       // next, update complex fields, starting with category
       const complexUpdatedCourse = await this.courseRepo.findOneBy({ id });
 
-      if (!complexUpdatedCourse) throw new NotFoundException('Cannot update course with given id as it was not found');
+      if (!complexUpdatedCourse)
+        throw new NotFoundException('Cannot update course with given id as it was not found');
 
       // if category id was updated
       if (updatedCategoryId) {

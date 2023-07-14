@@ -24,7 +24,10 @@ export class Course extends BaseEntity {
   @Column({ type: 'text', nullable: true })
   price?: number;
 
-  @ManyToOne(() => Category, (category: Category) => category.courses, { nullable: true, cascade: true })
+  @ManyToOne(() => Category, (category: Category) => category.courses, {
+    nullable: true,
+    cascade: true,
+  })
   category?: Category;
 
   @OneToMany(() => Section, (section: Section) => section.course, { nullable: true })

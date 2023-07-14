@@ -1,4 +1,13 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { LectureService } from './lecture.service';
 import { Lecture } from './entities/lecture.entity';
 import { NewLectureDto } from './dto/new-lecture.dto';
