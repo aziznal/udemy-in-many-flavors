@@ -14,6 +14,6 @@ export class Section extends BaseEntity {
   @ManyToOne(() => Course, (course: Course) => course.sections, { cascade: true })
   course!: Course;
 
-  @OneToMany(() => Lecture, (lecture: Lecture) => lecture.section)
-  lectures!: Lecture[];
+  @OneToMany(() => Lecture, (lecture: Lecture) => lecture.section, { nullable: true })
+  lectures?: Lecture[];
 }
