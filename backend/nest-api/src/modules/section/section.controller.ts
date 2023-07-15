@@ -1,4 +1,13 @@
-import { BadRequestException, Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { SectionService } from './section.service';
 import { Section } from './entities/section.entity';
 import { NewSectionDto } from './dto/new-section.dto';
@@ -14,7 +23,7 @@ export class SectionController {
   }
 
   @Get(':id')
-  findOne(id?: string): Promise<Section> {
+  findOne(@Param() id?: string): Promise<Section> {
     if (!id) throw new BadRequestException('id is required (/section/<your-id-here>)');
 
     return this.sectionService.findOne(id);
@@ -29,6 +38,7 @@ export class SectionController {
   update(
     @Body()
     updatedSectionDto: UpdatedSectionDto,
+    @Param()
     id?: string,
   ) {
     if (!id) throw new BadRequestException('id is required (/section/<your-id-here>)');
@@ -37,7 +47,10 @@ export class SectionController {
   }
 
   @Delete(':id')
-  delete(id?: string) {
+  delete(
+    @Param()
+    id?: string,
+  ) {
     if (!id) throw new BadRequestException('id is required (/section/<your-id-here>)');
 
     return this.sectionService.delete(id);
