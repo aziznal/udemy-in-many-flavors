@@ -1,38 +1,48 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { JwtService } from '@nestjs/jwt';
+import { UpdatedUserDto } from './dto/updated-user.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>,
+    private userRepo: Repository<User>,
 
     private jwtService: JwtService,
   ) {}
 
-  async getAllUsers(): Promise<User[]> {
-    return this.userRepository.find();
+  async findAll(): Promise<User[]> {
+    return this.userRepo.find();
   }
 
-  async findOne({ email, id }: { email?: string; id?: string }): Promise<User | null> {
+  // finds a user using `email` or `id` (uses `email` if both are given)
+  async findOne({ email, id }: { email?: string; id?: string }): Promise<User> {
     if (email) {
-      return this.userRepository.findOne({ where: { email } });
+      const user = await this.userRepo.findOne({ where: { email } });
+
+      if (!user) throw new NotFoundException('User was not found with given email');
+
+      return user;
     }
 
     if (id) {
-      return this.userRepository.findOne({ where: { id } });
+      const user = await this.userRepo.findOne({ where: { id } });
+
+      if (!user) throw new NotFoundException('User was not found with given id');
+
+      return user;
     }
 
-    return null;
+    throw new Error('Must pass either email or id');
   }
 
   async createUser(user: CreateUserDto) {
     // cofirm user is unique
-    const existingUser = await this.userRepository.findOne({
+    const existingUser = await this.userRepo.findOne({
       where: {
         email: user.email,
       },
@@ -42,11 +52,11 @@ export class UserService {
       throw new ConflictException('email already exists');
     }
 
-    const createdUser = this.userRepository.create({
+    const createdUser = this.userRepo.create({
       ...user,
     });
 
-    await this.userRepository.save({
+    await this.userRepo.save({
       ...createdUser,
     });
 
@@ -57,7 +67,20 @@ export class UserService {
     };
   }
 
-  async setAsInstructor({ userEmail }: { userEmail: string }) {
-    await this.userRepository.update({ email: userEmail }, { isInstructor: true });
+  async makeInstructor({ userEmail }: { userEmail: string }) {
+    await this.userRepo.update({ email: userEmail }, { isInstructor: true });
+  }
+
+  async update({ id, updatedUserDto }: { id: string; updatedUserDto: UpdatedUserDto }) {
+    const updatedUser = await this.userRepo.preload(updatedUserDto);
+
+    if (!updatedUser)
+      throw new NotFoundException('Could not update user as user with given id was not found');
+
+    await this.userRepo.save(updatedUser);
+  }
+
+  async delete(id: string) {
+    await this.userRepo.delete(id);
   }
 }

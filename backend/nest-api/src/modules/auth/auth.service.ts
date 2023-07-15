@@ -10,12 +10,18 @@ export class AuthService {
   constructor(private usersService: UserService, private jwtService: JwtService) {}
 
   async login({ email: loginEmail, password: loginPassword }: LoginDto) {
-    const matchedUser = await this.usersService.findOne({
-      email: loginEmail,
-    });
+    let matchedUser: User;
 
-    if (!matchedUser)
+    try {
+      matchedUser = await this.usersService.findOne({
+        email: loginEmail,
+      });
+    } catch (e: unknown) {
+      console.error(e);
+
+      // obfuscate whatever the real error is
       throw new NotFoundException('No user exists with the given username and password');
+    }
 
     const isPasswordMatching = await this.#checkPasswordsMatch({
       password: loginPassword,
@@ -40,9 +46,13 @@ export class AuthService {
       throw new UnauthorizedException('Invalid token');
     });
 
-    const user = await this.usersService.findOne({ email });
+    try {
+      const user = await this.usersService.findOne({ email });
 
-    if (!user) throw new NotFoundException('No user found');
+      if (!user) throw new NotFoundException('No user found');
+    } catch (e: unknown) {
+      throw new NotFoundException('No user found');
+    }
 
     return true;
   }
