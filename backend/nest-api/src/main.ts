@@ -12,7 +12,6 @@ async function bootstrap() {
   const nestPort = configService.get<NestConfig>('nest')!.port;
   const nodeEnv = configService.get('nodeEnv');
 
-  // enable cors
   app.enableCors();
 
   // Enable validation globally

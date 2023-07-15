@@ -1,13 +1,4 @@
-import {
-  BadRequestException,
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AuthorizedUser } from 'src/utils/decorators/authorized-user';
@@ -24,12 +15,7 @@ export class UserController {
   }
 
   @Get(':id')
-  findOne(
-    @Param()
-    id?: string,
-  ) {
-    if (!id) throw new BadRequestException('id is required (/user/<your-id-here>)');
-
+  findOne(@Param() id: string) {
     return this.userService.findOne({ id });
   }
 
@@ -49,10 +35,8 @@ export class UserController {
     updatedUserDto: UpdatedUserDto,
 
     @Param()
-    id?: string,
+    id: string,
   ) {
-    if (!id) throw new BadRequestException('id is required (/user/<your-id-here>)');
-
     await this.userService.update({
       id,
       updatedUserDto,
@@ -60,12 +44,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  async delete(
-    @Param()
-    id?: string,
-  ) {
-    if (!id) throw new BadRequestException('id is required (/user/<your-id-here>)');
-
+  async delete(@Param() id: string) {
     await this.userService.delete(id);
   }
 }

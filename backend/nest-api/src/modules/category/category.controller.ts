@@ -1,13 +1,4 @@
-import {
-  BadRequestException,
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { NewCategoryDto } from './dto/new-category.dto';
 import { UpdatedCategoryDto } from './dto/updated-category.dto';
 import { CategoryService } from './category.service';
@@ -23,9 +14,7 @@ export class CategoryController {
   }
 
   @Get(':id')
-  findOne(@Param() id?: string): Promise<Category> {
-    if (!id) throw new BadRequestException('id is required (/category/<your-id-here>)');
-
+  findOne(@Param() id: string): Promise<Category> {
     return this.categoryService.findOne(id);
   }
 
@@ -35,12 +24,7 @@ export class CategoryController {
   }
 
   @Patch(':id')
-  async update(
-    @Body() updatedCategoryDto: UpdatedCategoryDto,
-    @Param() id?: string,
-  ): Promise<void> {
-    if (!id) throw new BadRequestException('id is required (/category/<your-id-here>)');
-
+  async update(@Body() updatedCategoryDto: UpdatedCategoryDto, @Param() id: string): Promise<void> {
     return this.categoryService.update({
       id,
       updatedCategoryDto,
@@ -48,9 +32,7 @@ export class CategoryController {
   }
 
   @Delete(':id')
-  delete(@Param() id?: string) {
-    if (!id) throw new BadRequestException('id is required (/category/<your-id-here>)');
-
+  delete(@Param() id: string) {
     return this.categoryService.delete(id);
   }
 }

@@ -20,7 +20,9 @@ export class AuthService {
       console.error(e);
 
       // obfuscate whatever the real error is
-      throw new NotFoundException('No user exists with the given username and password');
+      throw new NotFoundException(
+        'Login failed: No user exists with the given username and password combination',
+      );
     }
 
     const isPasswordMatching = await this.#checkPasswordsMatch({
@@ -29,7 +31,9 @@ export class AuthService {
     });
 
     if (!isPasswordMatching)
-      throw new NotFoundException('No user exists with the given username and password');
+      throw new NotFoundException(
+        'Login failed: No user exists with the given username and password combination',
+      );
 
     const token = await this.#createToken(matchedUser);
 
@@ -42,16 +46,16 @@ export class AuthService {
    * Checks if given token is valid and belongs to an existing user
    */
   async verifyToken(token: string): Promise<boolean> {
+    throw new Error('unimplemented');
+
     const { email } = await this.jwtService.verifyAsync(token).catch(() => {
-      throw new UnauthorizedException('Invalid token');
+      throw new UnauthorizedException('Verify token failed: Invalid token');
     });
 
     try {
       const user = await this.usersService.findOne({ email });
-
-      if (!user) throw new NotFoundException('No user found');
     } catch (e: unknown) {
-      throw new NotFoundException('No user found');
+      throw new NotFoundException('Verify token failed: No user found');
     }
 
     return true;

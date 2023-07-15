@@ -1,22 +1,16 @@
 import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-
 import { Course } from './entities/course.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NewCourseDto } from './dto/new-course.dto';
 import { UpdatedCourseDto } from './dto/updated-course.dto';
-import { CategoryService } from '../category/category.service';
-import { SectionService } from '../section/section.service';
+import { Category } from '../category/entities/category.entity';
 
 @Injectable()
 export class CourseService {
   constructor(
     @InjectRepository(Course)
     private courseRepo: Repository<Course>,
-
-    private categoryService: CategoryService,
-
-    private sectionService: SectionService,
 
     private dataSource: DataSource,
   ) {}
@@ -29,7 +23,7 @@ export class CourseService {
     const course = await this.courseRepo.findOneBy({ id });
 
     if (!course) {
-      throw new NotFoundException('Could not find course with given id');
+      throw new NotFoundException('Find course failed: Course was not found');
     }
 
     return course;
@@ -56,22 +50,29 @@ export class CourseService {
       } = updatedCourseDto;
 
       // first update simple fields
-      const simpleUpdatedCourse = await this.courseRepo.preload({ id, ...simpleFields });
+      const simpleUpdatedCourse = await queryRunner.manager.preload(Course, {
+        id,
+        ...simpleFields,
+      });
 
       if (!simpleUpdatedCourse)
-        throw new NotFoundException('Cannot update course with given id as it was not found');
+        throw new NotFoundException('Update course failed: Course was not found');
 
-      await this.courseRepo.save(simpleUpdatedCourse);
+      await queryRunner.manager.save(Course, simpleUpdatedCourse);
 
       // next, update complex fields, starting with category
-      const complexUpdatedCourse = await this.courseRepo.findOneBy({ id });
+      const complexUpdatedCourse = await queryRunner.manager.findOneBy(Course, { id });
 
       if (!complexUpdatedCourse)
-        throw new NotFoundException('Cannot update course with given id as it was not found');
+        throw new NotFoundException('Update course failed: Course was not found');
 
       // if category id was updated
       if (updatedCategoryId) {
-        const category = await this.categoryService.findOne(updatedCategoryId);
+        const category = await queryRunner.manager.findOneBy(Category, { id: updatedCategoryId });
+
+        if (!category)
+          throw new NotFoundException('Change course category failed: new category was not found');
+
         complexUpdatedCourse.category = category;
       }
 
@@ -81,10 +82,10 @@ export class CourseService {
         //
         // TODO
         //
-        // Challenge: how to account for existing courses while creating potential new ones?
+        // Challenge: how to account for existing sections while creating potential new ones?
       }
 
-      await this.courseRepo.save(complexUpdatedCourse);
+      await queryRunner.manager.save(Course, complexUpdatedCourse);
 
       await queryRunner.commitTransaction();
     } catch (error: unknown) {
@@ -102,7 +103,11 @@ export class CourseService {
     }
   }
 
-  delete(id: string) {
+  async delete(id: string) {
+    const course = await this.courseRepo.findOneBy({ id });
+
+    if (!course) throw new NotFoundException('Delete course failed: Course was not found');
+
     return this.courseRepo.delete(id);
   }
 }

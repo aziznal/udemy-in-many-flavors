@@ -25,7 +25,8 @@ export class SubcategoryService {
   async findOne(id: string) {
     const subcategory = await this.subcategoryRepo.findOneBy({ id });
 
-    if (!subcategory) throw new NotFoundException('Could not find subcategory with given id');
+    if (!subcategory)
+      throw new NotFoundException('Find subcategory failed: subcategory was not found');
 
     return subcategory;
   }
@@ -34,9 +35,7 @@ export class SubcategoryService {
     const parentCategory = await this.categoryService.findOne(newSubcategoryDto.categoryId);
 
     if (!parentCategory)
-      throw new NotFoundException(
-        'Could not create new subcategory as category with given parent category id was not found',
-      );
+      throw new NotFoundException('Create subcategory failed: parent category was not found');
 
     const newSubcategory = this.subcategoryRepo.create({
       name: newSubcategoryDto.name,
@@ -62,9 +61,7 @@ export class SubcategoryService {
       const simpleSubcategoryUpdate = await queryRunner.manager.preload(Subcategory, simpleFields);
 
       if (!simpleSubcategoryUpdate)
-        throw new NotFoundException(
-          'Could not update subcategory as it was not found with given id',
-        );
+        throw new NotFoundException('Update subcategory failed: subcategory was not found');
 
       await queryRunner.manager.save(simpleSubcategoryUpdate);
 
@@ -73,16 +70,12 @@ export class SubcategoryService {
         const newCategory = await queryRunner.manager.findOneBy(Category, { id: newCategoryId });
 
         if (!newCategory)
-          throw new NotFoundException(
-            'Could not move subcategory to new category as a category was not found with given id',
-          );
+          throw new NotFoundException('Move subcategory failed: new parent category was not found');
 
         const movedSubcategory = await queryRunner.manager.findOneBy(Subcategory, { id });
 
         if (!movedSubcategory)
-          throw new NotFoundException(
-            'Could not move subcategory to new category as a category was not found with given id',
-          );
+          throw new NotFoundException('Move subcategory failed: Subcategory was not found');
 
         movedSubcategory.category = newCategory;
 
@@ -91,7 +84,7 @@ export class SubcategoryService {
         await queryRunner.commitTransaction();
       }
     } catch (e: unknown) {
-      console.error(e);
+      console.error(`[${SubcategoryService.name} | Update Error] ${e}`);
       await queryRunner.rollbackTransaction();
     } finally {
       await queryRunner.release();
@@ -99,6 +92,11 @@ export class SubcategoryService {
   }
 
   async delete(id: string) {
+    const subcategory = await this.subcategoryRepo.findOneBy({ id });
+
+    if (!subcategory)
+      throw new NotFoundException('Delete subcategory failed: Subcategory was not found');
+
     await this.subcategoryRepo.delete(id);
   }
 }

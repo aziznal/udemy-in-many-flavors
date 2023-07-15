@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate {
     const token = this.#extractTokenFromHeader(request);
 
     if (!token) {
-      throw new UnauthorizedException('Bad token or session expired');
+      throw new UnauthorizedException('Request failed: Bad token or session expired');
     }
 
     try {
@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
 
       request['user'] = payload;
     } catch {
-      throw new UnauthorizedException('Bad token or session expired');
+      throw new UnauthorizedException('Request failed: Bad token or session expired');
     }
 
     return true;

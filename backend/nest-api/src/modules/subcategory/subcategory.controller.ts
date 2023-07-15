@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param } from '@nestjs/common';
 import { SubcategoryService } from './subcategory.service';
 import { Subcategory } from './entities/subcategory.entity';
 import { NewSubcategoryDto } from './dto/new-subcategory.dto';
@@ -14,9 +14,7 @@ export class SubcategoryController {
   }
 
   @Get(':id')
-  findOne(@Param() id?: string): Promise<Subcategory> {
-    if (!id) throw new BadRequestException('id is required (/subcategory/<your-id-here>)');
-
+  findOne(@Param() id: string): Promise<Subcategory> {
     return this.subcategoryService.findOne(id);
   }
 
@@ -24,18 +22,14 @@ export class SubcategoryController {
     return this.subcategoryService.create(newSubcategoryDto);
   }
 
-  async update(@Body() updatedSubcategoryDto: UpdatedSubcategoryDto, @Param() id?: string) {
-    if (!id) throw new BadRequestException('id is required (/section/<your-id-here>)');
-
+  async update(@Body() updatedSubcategoryDto: UpdatedSubcategoryDto, @Param() id: string) {
     await this.subcategoryService.update({
       id,
       updatedSubcategoryDto,
     });
   }
 
-  async delete(@Param() id?: string) {
-    if (!id) throw new BadRequestException('id is required (/section/<your-id-here>)');
-
+  async delete(@Param() id: string) {
     await this.subcategoryService.delete(id);
   }
 }

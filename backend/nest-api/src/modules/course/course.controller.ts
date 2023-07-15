@@ -1,13 +1,4 @@
-import {
-  BadRequestException,
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { Course } from './entities/course.entity';
 import { CourseService } from './course.service';
 import { NewCourseDto } from './dto/new-course.dto';
@@ -23,9 +14,7 @@ export class CourseController {
   }
 
   @Get(':id')
-  findOne(@Param() id?: string): Promise<Course> {
-    if (!id) throw new BadRequestException('id is required (/course/<your-id-here>)');
-
+  findOne(@Param() id: string): Promise<Course> {
     return this.courseService.findOne(id);
   }
 
@@ -35,16 +24,12 @@ export class CourseController {
   }
 
   @Patch(':id')
-  update(@Body() updatedCourseDto: UpdatedCourseDto, @Param() id?: string) {
-    if (!id) throw new BadRequestException('id is required (/course/<your-id-here>)');
-
+  update(@Body() updatedCourseDto: UpdatedCourseDto, @Param() id: string) {
     return this.courseService.update({ id, updatedCourseDto });
   }
 
   @Delete(':id')
-  delete(@Param() id?: string) {
-    if (!id) throw new BadRequestException('id is required (/course/<your-id-here>)');
-
+  delete(@Param() id: string) {
     return this.courseService.delete(id);
   }
 }

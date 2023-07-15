@@ -9,7 +9,8 @@ export const AuthorizedUser = createParamDecorator<never, never, JwtTokenPayload
   (_data, ctx: ExecutionContext) => {
     const request = ctx.switchToHttp().getRequest<RequestWithAuth>();
 
-    if (!request.headers.authorization) throw new UnauthorizedException('missing jwt');
+    if (!request.headers.authorization)
+      throw new UnauthorizedException('missing jwt which is required for an authenticated request');
 
     try {
       const rawToken = decode(request.headers.authorization.replace('Bearer ', ''));

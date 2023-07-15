@@ -24,7 +24,8 @@ export class UserService {
     if (email) {
       const user = await this.userRepo.findOne({ where: { email } });
 
-      if (!user) throw new NotFoundException('User was not found with given email');
+      if (!user)
+        throw new NotFoundException('Find user failed: User was not found with given email');
 
       return user;
     }
@@ -32,12 +33,12 @@ export class UserService {
     if (id) {
       const user = await this.userRepo.findOne({ where: { id } });
 
-      if (!user) throw new NotFoundException('User was not found with given id');
+      if (!user) throw new NotFoundException('Find user failed: User was not found with given id');
 
       return user;
     }
 
-    throw new Error('Must pass either email or id');
+    throw new Error('Find user failed: Must pass either email or id');
   }
 
   async createUser(user: CreateUserDto) {
@@ -49,7 +50,7 @@ export class UserService {
     });
 
     if (existingUser) {
-      throw new ConflictException('email already exists');
+      throw new ConflictException('Create user failed: email already exists');
     }
 
     const createdUser = this.userRepo.create({
@@ -72,15 +73,18 @@ export class UserService {
   }
 
   async update({ id, updatedUserDto }: { id: string; updatedUserDto: UpdatedUserDto }) {
-    const updatedUser = await this.userRepo.preload(updatedUserDto);
+    const updatedUser = await this.userRepo.preload({ id, ...updatedUserDto });
 
-    if (!updatedUser)
-      throw new NotFoundException('Could not update user as user with given id was not found');
+    if (!updatedUser) throw new NotFoundException('Make instructor failed: User was not found');
 
     await this.userRepo.save(updatedUser);
   }
 
   async delete(id: string) {
+    const user = this.userRepo.findOneBy({ id });
+
+    if (!user) throw new NotFoundException('Delete user failed: User was not found');
+
     await this.userRepo.delete(id);
   }
 }

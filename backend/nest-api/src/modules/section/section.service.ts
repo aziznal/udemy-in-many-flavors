@@ -33,21 +33,21 @@ export class SectionService {
   }
 
   async update({ id, updatedSectionDto }: { id: string; updatedSectionDto: UpdatedSectionDto }) {
-    // first update simple fields
-    const simpleSectionUpdate = await this.sectionRepo.preload({
+    const updatedSection = await this.sectionRepo.preload({
       id,
       ...updatedSectionDto,
     });
 
-    if (!simpleSectionUpdate)
-      throw new NotFoundException(
-        'Update failed: Could not update section as no section was found with the given id',
-      );
+    if (!updatedSection) throw new NotFoundException('Update failed: Section was not found');
 
-    await this.sectionRepo.save(simpleSectionUpdate);
+    await this.sectionRepo.save(updatedSection);
   }
 
   async delete(id: string) {
+    const section = await this.sectionRepo.findOneBy({ id });
+
+    if (!section) throw new NotFoundException('Delete section failed: Section was not found');
+
     await this.sectionRepo.delete(id);
   }
 }

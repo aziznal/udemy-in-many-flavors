@@ -22,7 +22,7 @@ export class LectureService {
   async findOne(id: string): Promise<Lecture> {
     const lecture = await this.lectureRepo.findOneBy({ id });
 
-    if (!lecture) throw new NotFoundException('Lecture with given id was not found');
+    if (!lecture) throw new NotFoundException('Find lecture failed: Lecture was not found');
 
     return lecture;
   }
@@ -48,7 +48,7 @@ export class LectureService {
       });
 
       if (!simpleUpdatedLecture) {
-        throw new NotFoundException('Cannot updated Lecture as it was not found');
+        throw new NotFoundException('Update lecture failed: Lecture was not found');
       }
 
       await queryRunner.manager.save(Lecture, simpleUpdatedLecture);
@@ -57,15 +57,12 @@ export class LectureService {
       if (updatedSectionId) {
         const newSection = await queryRunner.manager.findOneBy(Section, { id: updatedSectionId });
         if (!newSection)
-          throw new NotFoundException(
-            'Update failed: Could not change lecture section as the section was not found with the given id',
-          );
+          throw new NotFoundException('Change lecture section failed: new section was not found');
 
         const lecture = await queryRunner.manager.findOneBy(Lecture, { id });
+
         if (!lecture)
-          throw new NotFoundException(
-            'Update failed: Could not change lecture section as the lecture was not found with the given id',
-          );
+          throw new NotFoundException('Change lecture section failed: Lecture was not found');
 
         lecture.section = newSection;
 
@@ -80,6 +77,10 @@ export class LectureService {
   }
 
   async delete(id: string) {
+    const lecture = await this.lectureRepo.findOneBy({ id });
+
+    if (!lecture) throw new NotFoundException('Delete lecture failed: Lecture was not found');
+
     await this.lectureRepo.delete(id);
   }
 }

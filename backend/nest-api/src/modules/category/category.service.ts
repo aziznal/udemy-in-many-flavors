@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Category } from './entities/category.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -20,7 +20,7 @@ export class CategoryService {
     const category = await this.categoryRepo.findOneBy({ id });
 
     if (!category) {
-      throw new NotFoundException('Category with given ID was not found');
+      throw new NotFoundException('Find category failed: Category was not found');
     }
 
     return category;
@@ -41,28 +41,18 @@ export class CategoryService {
     id: string;
     updatedCategoryDto: UpdatedCategoryDto;
   }): Promise<void> {
-    try {
-      await this.findOne(id);
-    } catch (e: unknown) {
-      throw new NotFoundException('Cannot update course as it was not found');
-    }
+    const category = await this.categoryRepo.preload({ id, ...updatedCategoryDto });
 
-    const result = await this.categoryRepo.update({ id: id }, updatedCategoryDto);
+    if (!category) throw new NotFoundException('Updated category failed: Category was not found');
 
-    if (!result.affected)
-      throw new InternalServerErrorException('Something went wrong while updating category!');
+    await this.categoryRepo.save(category);
   }
 
   async delete(id: string) {
-    try {
-      await this.findOne(id);
-    } catch (e: unknown) {
-      throw new NotFoundException('Cannot delete course as it was not found');
-    }
+    const category = await this.categoryRepo.findOneBy({ id });
 
-    const result = await this.categoryRepo.delete({ id: id });
+    if (!category) throw new NotFoundException('Delete category failed: Category was not found');
 
-    if (!result.affected)
-      throw new InternalServerErrorException('Something went wrong while deleting category!');
+    await this.categoryRepo.delete(category);
   }
 }
