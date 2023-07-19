@@ -14,7 +14,7 @@ export class SectionController {
   }
 
   @Get(':id')
-  findOne(@Param("id") id: string): Promise<Section> {
+  findOne(@Param('id') id: string): Promise<Section> {
     return this.sectionService.findOne(id);
   }
 
@@ -28,14 +28,14 @@ export class SectionController {
     @Body()
     updatedSectionDto: UpdatedSectionDto,
 
-    @Param("id")
+    @Param('id')
     id: string,
   ) {
     return this.sectionService.update({ id, updatedSectionDto });
   }
 
   @Delete(':id')
-  delete(@Param("id") id: string) {
+  delete(@Param('id') id: string) {
     return this.sectionService.delete(id);
   }
 }

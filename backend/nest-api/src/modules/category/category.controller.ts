@@ -14,7 +14,7 @@ export class CategoryController {
   }
 
   @Get(':id')
-  findOne(@Param("id") id: string): Promise<Category> {
+  findOne(@Param('id') id: string): Promise<Category> {
     return this.categoryService.findOne(id);
   }
 
@@ -24,7 +24,7 @@ export class CategoryController {
   }
 
   @Patch(':id')
-  async update(@Body() updatedCategoryDto: UpdatedCategoryDto, @Param("id") id: string): Promise<void> {
+  async update(@Body() updatedCategoryDto: UpdatedCategoryDto, @Param('id') id: string): Promise<void> {
     return this.categoryService.update({
       id,
       updatedCategoryDto,
@@ -32,7 +32,7 @@ export class CategoryController {
   }
 
   @Delete(':id')
-  delete(@Param("id") id: string) {
+  delete(@Param('id') id: string) {
     return this.categoryService.delete(id);
   }
 }

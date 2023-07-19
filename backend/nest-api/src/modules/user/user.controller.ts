@@ -15,7 +15,7 @@ export class UserController {
   }
 
   @Get(':id')
-  findOne(@Param("id") id: string) {
+  findOne(@Param('id') id: string) {
     return this.userService.findOne({ id });
   }
 
@@ -34,7 +34,7 @@ export class UserController {
     @Body()
     updatedUserDto: UpdatedUserDto,
 
-    @Param("id")
+    @Param('id')
     id: string,
   ) {
     await this.userService.update({
@@ -44,7 +44,7 @@ export class UserController {
   }
 
   @Delete(':id')
-  async delete(@Param("id") id: string) {
+  async delete(@Param('id') id: string) {
     await this.userService.delete(id);
   }
 }
