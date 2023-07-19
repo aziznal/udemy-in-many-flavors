@@ -14,7 +14,7 @@ export class LectureController {
   }
 
   @Get(':id')
-  findOne(@Param() id: string) {
+  findOne(@Param("id") id: string) {
     return this.lectureService.findOne(id);
   }
 
@@ -24,12 +24,12 @@ export class LectureController {
   }
 
   @Patch(':id')
-  update(@Body() updatedLectureDto: UpdatedLectureDto, @Param() id: string) {
+  update(@Body() updatedLectureDto: UpdatedLectureDto, @Param("id") id: string) {
     return this.lectureService.update({ id, updatedLectureDto });
   }
 
   @Delete(':id')
-  async delete(@Param() id: string) {
+  async delete(@Param("id") id: string) {
     await this.lectureService.delete(id);
   }
 }

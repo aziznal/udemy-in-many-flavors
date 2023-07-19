@@ -14,7 +14,7 @@ export class SubcategoryController {
   }
 
   @Get(':id')
-  findOne(@Param() id: string): Promise<Subcategory> {
+  findOne(@Param("id") id: string): Promise<Subcategory> {
     return this.subcategoryService.findOne(id);
   }
 
@@ -22,14 +22,14 @@ export class SubcategoryController {
     return this.subcategoryService.create(newSubcategoryDto);
   }
 
-  async update(@Body() updatedSubcategoryDto: UpdatedSubcategoryDto, @Param() id: string) {
+  async update(@Body() updatedSubcategoryDto: UpdatedSubcategoryDto, @Param("id") id: string) {
     await this.subcategoryService.update({
       id,
       updatedSubcategoryDto,
     });
   }
 
-  async delete(@Param() id: string) {
+  async delete(@Param("id") id: string) {
     await this.subcategoryService.delete(id);
   }
 }
