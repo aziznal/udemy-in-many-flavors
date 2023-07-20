@@ -34,14 +34,8 @@ export class CategoryService {
     return newCategory;
   }
 
-  async update({
-    id,
-    updatedCategoryDto,
-  }: {
-    id: string;
-    updatedCategoryDto: UpdatedCategoryDto;
-  }): Promise<void> {
-    const category = await this.categoryRepo.preload({ id, ...updatedCategoryDto });
+  async update(updatedCategoryDto: UpdatedCategoryDto): Promise<void> {
+    const category = await this.categoryRepo.preload({ ...updatedCategoryDto });
 
     if (!category) throw new NotFoundException('Updated category failed: Category was not found');
 

@@ -24,11 +24,8 @@ export class CategoryController {
   }
 
   @Patch(':id')
-  async update(@Body() updatedCategoryDto: UpdatedCategoryDto, @Param('id') id: string): Promise<void> {
-    return this.categoryService.update({
-      id,
-      updatedCategoryDto,
-    });
+  async update(@Body() updatedCategoryDto: UpdatedCategoryDto): Promise<void> {
+    return this.categoryService.update(updatedCategoryDto);
   }
 
   @Delete(':id')
