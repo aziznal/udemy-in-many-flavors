@@ -72,8 +72,8 @@ export class UserService {
     await this.userRepo.update({ email: userEmail }, { isInstructor: true });
   }
 
-  async update({ id, updatedUserDto }: { id: string; updatedUserDto: UpdatedUserDto }) {
-    const updatedUser = await this.userRepo.preload({ id, ...updatedUserDto });
+  async update(updatedUserDto: UpdatedUserDto) {
+    const updatedUser = await this.userRepo.preload(updatedUserDto);
 
     if (!updatedUser) throw new NotFoundException('Make instructor failed: User was not found');
 

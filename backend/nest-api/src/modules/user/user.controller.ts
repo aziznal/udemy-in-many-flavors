@@ -29,18 +29,9 @@ export class UserController {
     await this.userService.makeInstructor({ userEmail: user.email });
   }
 
-  @Patch(':id')
-  async update(
-    @Body()
-    updatedUserDto: UpdatedUserDto,
-
-    @Param('id')
-    id: string,
-  ) {
-    await this.userService.update({
-      id,
-      updatedUserDto,
-    });
+  @Patch()
+  async update(@Body() updatedUserDto: UpdatedUserDto) {
+    await this.userService.update(updatedUserDto);
   }
 
   @Delete(':id')
