@@ -23,7 +23,7 @@ export class LectureController {
     return this.lectureService.createLecture(newLectureDto);
   }
 
-  @Patch(':id')
+  @Patch()
   update(@Body() updatedLectureDto: UpdatedLectureDto) {
     return this.lectureService.update(updatedLectureDto);
   }

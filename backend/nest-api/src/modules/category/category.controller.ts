@@ -23,7 +23,7 @@ export class CategoryController {
     return this.categoryService.create(newCategoryDto);
   }
 
-  @Patch(':id')
+  @Patch()
   async update(@Body() updatedCategoryDto: UpdatedCategoryDto): Promise<void> {
     return this.categoryService.update(updatedCategoryDto);
   }
