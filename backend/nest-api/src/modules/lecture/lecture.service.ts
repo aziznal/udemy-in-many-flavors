@@ -35,17 +35,14 @@ export class LectureService {
     return newLecture;
   }
 
-  async update({ id, updatedLectureDto }: { id: string; updatedLectureDto: UpdatedLectureDto }) {
+  async update(updatedLectureDto: UpdatedLectureDto) {
     const { sectionId: updatedSectionId, ...simpleFields } = updatedLectureDto;
 
     const queryRunner = this.dataSource.createQueryRunner();
     await queryRunner.startTransaction();
 
     try {
-      const simpleUpdatedLecture = await queryRunner.manager.preload(Lecture, {
-        id,
-        ...simpleFields,
-      });
+      const simpleUpdatedLecture = await queryRunner.manager.preload(Lecture, simpleFields);
 
       if (!simpleUpdatedLecture) {
         throw new NotFoundException('Update lecture failed: Lecture was not found');
@@ -59,7 +56,7 @@ export class LectureService {
         if (!newSection)
           throw new NotFoundException('Change lecture section failed: new section was not found');
 
-        const lecture = await queryRunner.manager.findOneBy(Lecture, { id });
+        const lecture = await queryRunner.manager.findOneBy(Lecture, { id: updatedLectureDto.id });
 
         if (!lecture)
           throw new NotFoundException('Change lecture section failed: Lecture was not found');

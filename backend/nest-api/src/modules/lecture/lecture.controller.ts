@@ -24,8 +24,8 @@ export class LectureController {
   }
 
   @Patch(':id')
-  update(@Body() updatedLectureDto: UpdatedLectureDto, @Param('id') id: string) {
-    return this.lectureService.update({ id, updatedLectureDto });
+  update(@Body() updatedLectureDto: UpdatedLectureDto) {
+    return this.lectureService.update(updatedLectureDto);
   }
 
   @Delete(':id')
