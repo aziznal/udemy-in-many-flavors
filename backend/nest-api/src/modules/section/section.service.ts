@@ -32,11 +32,8 @@ export class SectionService {
     return newSection;
   }
 
-  async update({ id, updatedSectionDto }: { id: string; updatedSectionDto: UpdatedSectionDto }) {
-    const updatedSection = await this.sectionRepo.preload({
-      id,
-      ...updatedSectionDto,
-    });
+  async update(updatedSectionDto: UpdatedSectionDto) {
+    const updatedSection = await this.sectionRepo.preload(updatedSectionDto);
 
     if (!updatedSection) throw new NotFoundException('Update failed: Section was not found');
 

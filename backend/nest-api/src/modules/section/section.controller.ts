@@ -23,15 +23,12 @@ export class SectionController {
     return this.sectionService.create(newSectionDto);
   }
 
-  @Patch(':id')
+  @Patch()
   update(
     @Body()
     updatedSectionDto: UpdatedSectionDto,
-
-    @Param('id')
-    id: string,
   ) {
-    return this.sectionService.update({ id, updatedSectionDto });
+    return this.sectionService.update(updatedSectionDto);
   }
 
   @Delete(':id')
