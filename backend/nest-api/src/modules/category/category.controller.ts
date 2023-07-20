@@ -3,6 +3,7 @@ import { NewCategoryDto } from './dto/new-category.dto';
 import { UpdatedCategoryDto } from './dto/updated-category.dto';
 import { CategoryService } from './category.service';
 import { Category } from './entities/category.entity';
+import { validateUUID } from 'src/utils/param-validators/id-validator';
 
 @Controller('category')
 export class CategoryController {
@@ -15,6 +16,7 @@ export class CategoryController {
 
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Category> {
+    validateUUID(id);
     return this.categoryService.findOne(id);
   }
 
@@ -30,6 +32,7 @@ export class CategoryController {
 
   @Delete(':id')
   delete(@Param('id') id: string) {
+    validateUUID(id);
     return this.categoryService.delete(id);
   }
 }

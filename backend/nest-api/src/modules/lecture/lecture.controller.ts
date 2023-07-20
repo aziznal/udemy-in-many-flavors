@@ -3,6 +3,7 @@ import { LectureService } from './lecture.service';
 import { Lecture } from './entities/lecture.entity';
 import { NewLectureDto } from './dto/new-lecture.dto';
 import { UpdatedLectureDto } from './dto/updated-lecture.dto';
+import { validateUUID } from 'src/utils/param-validators/id-validator';
 
 @Controller('lecture')
 export class LectureController {
@@ -15,6 +16,7 @@ export class LectureController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
+    validateUUID(id);
     return this.lectureService.findOne(id);
   }
 
@@ -30,6 +32,7 @@ export class LectureController {
 
   @Delete(':id')
   async delete(@Param('id') id: string) {
+    validateUUID(id);
     await this.lectureService.delete(id);
   }
 }

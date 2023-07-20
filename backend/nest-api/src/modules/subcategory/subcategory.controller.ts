@@ -3,6 +3,8 @@ import { SubcategoryService } from './subcategory.service';
 import { Subcategory } from './entities/subcategory.entity';
 import { NewSubcategoryDto } from './dto/new-subcategory.dto';
 import { UpdatedSubcategoryDto } from './dto/updated-subcategory.dto';
+import { z } from 'zod';
+import { validateUUID } from 'src/utils/param-validators/id-validator';
 
 @Controller('subcategory')
 export class SubcategoryController {
@@ -15,6 +17,8 @@ export class SubcategoryController {
 
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Subcategory> {
+    validateUUID(id);
+
     return this.subcategoryService.findOne(id);
   }
 
@@ -30,6 +34,8 @@ export class SubcategoryController {
 
   @Delete(':id')
   async delete(@Param('id') id: string) {
+    validateUUID(id);
+
     await this.subcategoryService.delete(id);
   }
 }

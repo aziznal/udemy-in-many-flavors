@@ -3,6 +3,7 @@ import { SectionService } from './section.service';
 import { Section } from './entities/section.entity';
 import { NewSectionDto } from './dto/new-section.dto';
 import { UpdatedSectionDto } from './dto/updated-section.dto';
+import { validateUUID } from 'src/utils/param-validators/id-validator';
 
 @Controller('section')
 export class SectionController {
@@ -15,6 +16,7 @@ export class SectionController {
 
   @Get(':id')
   findOne(@Param('id') id: string): Promise<Section> {
+    validateUUID(id);
     return this.sectionService.findOne(id);
   }
 
@@ -33,6 +35,7 @@ export class SectionController {
 
   @Delete(':id')
   delete(@Param('id') id: string) {
+    validateUUID(id);
     return this.sectionService.delete(id);
   }
 }
