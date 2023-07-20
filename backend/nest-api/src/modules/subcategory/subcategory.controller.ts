@@ -22,11 +22,8 @@ export class SubcategoryController {
     return this.subcategoryService.create(newSubcategoryDto);
   }
 
-  async update(@Body() updatedSubcategoryDto: UpdatedSubcategoryDto, @Param('id') id: string) {
-    await this.subcategoryService.update({
-      id,
-      updatedSubcategoryDto,
-    });
+  async update(@Body() updatedSubcategoryDto: UpdatedSubcategoryDto) {
+    await this.subcategoryService.update(updatedSubcategoryDto);
   }
 
   async delete(@Param('id') id: string) {

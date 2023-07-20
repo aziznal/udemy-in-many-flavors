@@ -45,13 +45,7 @@ export class SubcategoryService {
     await this.subcategoryRepo.save(newSubcategory);
   }
 
-  async update({
-    id,
-    updatedSubcategoryDto,
-  }: {
-    id: string;
-    updatedSubcategoryDto: UpdatedSubcategoryDto;
-  }) {
+  async update(updatedSubcategoryDto: UpdatedSubcategoryDto) {
     const { newCategoryId, ...simpleFields } = updatedSubcategoryDto;
 
     const queryRunner = this.dataSource.createQueryRunner();
@@ -72,7 +66,9 @@ export class SubcategoryService {
         if (!newCategory)
           throw new NotFoundException('Move subcategory failed: new parent category was not found');
 
-        const movedSubcategory = await queryRunner.manager.findOneBy(Subcategory, { id });
+        const movedSubcategory = await queryRunner.manager.findOneBy(Subcategory, {
+          id: updatedSubcategoryDto.id,
+        });
 
         if (!movedSubcategory)
           throw new NotFoundException('Move subcategory failed: Subcategory was not found');
