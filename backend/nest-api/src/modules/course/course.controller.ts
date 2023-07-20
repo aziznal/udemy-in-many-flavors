@@ -24,8 +24,8 @@ export class CourseController {
   }
 
   @Patch(':id')
-  update(@Body() updatedCourseDto: UpdatedCourseDto, @Param('id') id: string) {
-    return this.courseService.update({ id, updatedCourseDto });
+  update(@Body() updatedCourseDto: UpdatedCourseDto) {
+    return this.courseService.update(updatedCourseDto);
   }
 
   @Delete(':id')

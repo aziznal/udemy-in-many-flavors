@@ -37,7 +37,7 @@ export class CourseService {
     return newCourse;
   }
 
-  async update({ id, updatedCourseDto }: { id: string; updatedCourseDto: UpdatedCourseDto }) {
+  async update(updatedCourseDto: UpdatedCourseDto) {
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.startTransaction();
@@ -50,10 +50,7 @@ export class CourseService {
       } = updatedCourseDto;
 
       // first update simple fields
-      const simpleUpdatedCourse = await queryRunner.manager.preload(Course, {
-        id,
-        ...simpleFields,
-      });
+      const simpleUpdatedCourse = await queryRunner.manager.preload(Course, simpleFields);
 
       if (!simpleUpdatedCourse)
         throw new NotFoundException('Update course failed: Course was not found');
@@ -61,7 +58,9 @@ export class CourseService {
       await queryRunner.manager.save(Course, simpleUpdatedCourse);
 
       // next, update complex fields, starting with category
-      const complexUpdatedCourse = await queryRunner.manager.findOneBy(Course, { id });
+      const complexUpdatedCourse = await queryRunner.manager.findOneBy(Course, {
+        id: updatedCourseDto.id,
+      });
 
       if (!complexUpdatedCourse)
         throw new NotFoundException('Update course failed: Course was not found');
