@@ -19,33 +19,52 @@ export class SubcategoryService {
   ) {}
 
   async findAll(): Promise<Subcategory[]> {
-    return this.subcategoryRepo.find();
+    return this.subcategoryRepo.find({
+      relations: ['parentCategory'],
+    });
   }
 
-  async findOne(id: string) {
-    const subcategory = await this.subcategoryRepo.findOneBy({ id });
+  async findOne(id: string): Promise<Subcategory> {
+    const subcategory = await this.subcategoryRepo.find({
+      where: { id },
+      relations: ['parentCategory'],
+      take: 1,
+    });
 
-    if (!subcategory)
+    if (!subcategory || subcategory.length === 0)
       throw new NotFoundException('Find subcategory failed: subcategory was not found');
 
-    return subcategory;
+    return subcategory[0];
   }
 
-  async create(newSubcategoryDto: NewSubcategoryDto) {
+  async create(newSubcategoryDto: NewSubcategoryDto): Promise<Subcategory> {
+    // Confirm parent category exists
     const parentCategory = await this.categoryService.findOne(newSubcategoryDto.categoryId);
 
     if (!parentCategory)
       throw new NotFoundException('Create subcategory failed: parent category was not found');
 
+    // Confirm name is unique
+    const existingSubcategory = await this.subcategoryRepo.findOneBy({
+      name: newSubcategoryDto.name,
+    });
+
+    if (existingSubcategory)
+      throw new NotFoundException(
+        'Create subcategory failed: subcategory with given name already exists',
+      );
+
     const newSubcategory = this.subcategoryRepo.create({
       name: newSubcategoryDto.name,
-      category: parentCategory,
+      parentCategory: parentCategory,
     });
 
     await this.subcategoryRepo.save(newSubcategory);
+
+    return newSubcategory;
   }
 
-  async update(updatedSubcategoryDto: UpdatedSubcategoryDto) {
+  async update(updatedSubcategoryDto: UpdatedSubcategoryDto): Promise<void> {
     const { newCategoryId, ...simpleFields } = updatedSubcategoryDto;
 
     const queryRunner = this.dataSource.createQueryRunner();
@@ -73,7 +92,7 @@ export class SubcategoryService {
         if (!movedSubcategory)
           throw new NotFoundException('Move subcategory failed: Subcategory was not found');
 
-        movedSubcategory.category = newCategory;
+        movedSubcategory.parentCategory = newCategory;
 
         await queryRunner.manager.save(Subcategory, movedSubcategory);
 
@@ -87,12 +106,12 @@ export class SubcategoryService {
     }
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<void> {
     const subcategory = await this.subcategoryRepo.findOneBy({ id });
 
     if (!subcategory)
       throw new NotFoundException('Delete subcategory failed: Subcategory was not found');
 
-    await this.subcategoryRepo.delete(id);
+    await this.subcategoryRepo.remove(subcategory);
   }
 }

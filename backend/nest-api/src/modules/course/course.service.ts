@@ -79,7 +79,7 @@ export class CourseService {
       if (updatedSections) {
         // updated sections means new sections were added. Create them and add them here
         //
-        // TODO
+        // TODO: Finish this
         //
         // Challenge: how to account for existing sections while creating potential new ones?
       }

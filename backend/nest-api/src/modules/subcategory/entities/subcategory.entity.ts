@@ -8,6 +8,8 @@ export class Subcategory extends BaseEntity {
   @Column({ type: 'text' })
   name!: string;
 
-  @ManyToOne(() => Category, (category: Category) => category.subcategories, { cascade: true })
-  category!: Category;
+  @ManyToOne(() => Category, (category: Category) => category.subcategories, {
+    onDelete: 'CASCADE',
+  })
+  parentCategory!: Category;
 }
