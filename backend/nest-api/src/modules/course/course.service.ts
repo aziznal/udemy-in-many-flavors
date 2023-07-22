@@ -37,7 +37,7 @@ export class CourseService {
     return newCourse;
   }
 
-  async update(updatedCourseDto: UpdatedCourseDto) {
+  async update(updatedCourseDto: UpdatedCourseDto): Promise<void> {
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.startTransaction();
@@ -102,11 +102,11 @@ export class CourseService {
     }
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<void> {
     const course = await this.courseRepo.findOneBy({ id });
 
     if (!course) throw new NotFoundException('Delete course failed: Course was not found');
 
-    return this.courseRepo.delete(id);
+    await this.courseRepo.delete(id);
   }
 }

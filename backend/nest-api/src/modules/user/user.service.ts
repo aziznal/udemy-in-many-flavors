@@ -41,7 +41,7 @@ export class UserService {
     throw new Error('Find user failed: Must pass either email or id');
   }
 
-  async createUser(user: CreateUserDto) {
+  async createUser(user: CreateUserDto): Promise<{ accessToken: string }> {
     // cofirm user is unique
     const existingUser = await this.userRepo.findOne({
       where: {
@@ -68,11 +68,11 @@ export class UserService {
     };
   }
 
-  async makeInstructor({ userEmail }: { userEmail: string }) {
+  async makeInstructor({ userEmail }: { userEmail: string }): Promise<void> {
     await this.userRepo.update({ email: userEmail }, { isInstructor: true });
   }
 
-  async update(updatedUserDto: UpdatedUserDto) {
+  async update(updatedUserDto: UpdatedUserDto): Promise<void> {
     const updatedUser = await this.userRepo.preload(updatedUserDto);
 
     if (!updatedUser) throw new NotFoundException('Make instructor failed: User was not found');
@@ -80,7 +80,7 @@ export class UserService {
     await this.userRepo.save(updatedUser);
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<void> {
     const user = this.userRepo.findOneBy({ id });
 
     if (!user) throw new NotFoundException('Delete user failed: User was not found');

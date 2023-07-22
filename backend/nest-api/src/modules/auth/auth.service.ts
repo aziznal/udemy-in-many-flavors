@@ -9,7 +9,10 @@ import { JwtTokenPayload } from 'src/global-types/jwt-token-payload.type';
 export class AuthService {
   constructor(private usersService: UserService, private jwtService: JwtService) {}
 
-  async login({ email: loginEmail, password: loginPassword }: LoginDto) {
+  async login({
+    email: loginEmail,
+    password: loginPassword,
+  }: LoginDto): Promise<{ accessToken: string }> {
     let matchedUser: User;
 
     try {

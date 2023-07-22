@@ -35,7 +35,7 @@ export class LectureService {
     return newLecture;
   }
 
-  async update(updatedLectureDto: UpdatedLectureDto) {
+  async update(updatedLectureDto: UpdatedLectureDto): Promise<void> {
     const { sectionId: updatedSectionId, ...simpleFields } = updatedLectureDto;
 
     const queryRunner = this.dataSource.createQueryRunner();
@@ -73,7 +73,7 @@ export class LectureService {
     }
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<void> {
     const lecture = await this.lectureRepo.findOneBy({ id });
 
     if (!lecture) throw new NotFoundException('Delete lecture failed: Lecture was not found');

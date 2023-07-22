@@ -32,7 +32,7 @@ export class SectionService {
     return newSection;
   }
 
-  async update(updatedSectionDto: UpdatedSectionDto) {
+  async update(updatedSectionDto: UpdatedSectionDto): Promise<void> {
     const updatedSection = await this.sectionRepo.preload(updatedSectionDto);
 
     if (!updatedSection) throw new NotFoundException('Update failed: Section was not found');
@@ -40,7 +40,7 @@ export class SectionService {
     await this.sectionRepo.save(updatedSection);
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<void> {
     const section = await this.sectionRepo.findOneBy({ id });
 
     if (!section) throw new NotFoundException('Delete section failed: Section was not found');
