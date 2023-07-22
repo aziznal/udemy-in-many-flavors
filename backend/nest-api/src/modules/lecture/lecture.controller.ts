@@ -1,6 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { LectureService } from './lecture.service';
-import { Lecture } from './entities/lecture.entity';
 import { NewLectureDto } from './dto/new-lecture.dto';
 import { UpdatedLectureDto } from './dto/updated-lecture.dto';
 import { validateUUID } from 'src/utils/param-validators/id-validator';
@@ -10,7 +9,7 @@ export class LectureController {
   constructor(private lectureService: LectureService) {}
 
   @Get()
-  findAll(): Promise<Lecture[]> {
+  findAll() {
     return this.lectureService.findAll();
   }
 
@@ -21,7 +20,7 @@ export class LectureController {
   }
 
   @Post('lecture')
-  createLecture(@Body() newLectureDto: NewLectureDto): Promise<Lecture> {
+  createLecture(@Body() newLectureDto: NewLectureDto) {
     return this.lectureService.createLecture(newLectureDto);
   }
 

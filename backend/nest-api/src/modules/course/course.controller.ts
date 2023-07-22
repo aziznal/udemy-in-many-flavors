@@ -1,5 +1,4 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
-import { Course } from './entities/course.entity';
 import { CourseService } from './course.service';
 import { NewCourseDto } from './dto/new-course.dto';
 import { UpdatedCourseDto } from './dto/updated-course.dto';
@@ -10,18 +9,18 @@ export class CourseController {
   constructor(private courseService: CourseService) {}
 
   @Get()
-  findAll(): Promise<Course[]> {
+  findAll() {
     return this.courseService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<Course> {
+  findOne(@Param('id') id: string) {
     validateUUID(id);
     return this.courseService.findOne(id);
   }
 
   @Post()
-  create(@Body() newCourseDto: NewCourseDto): Promise<Course> {
+  create(@Body() newCourseDto: NewCourseDto) {
     return this.courseService.create(newCourseDto);
   }
 
